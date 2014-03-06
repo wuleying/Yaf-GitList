@@ -1,0 +1,12 @@
+/* Navbar */
+.nav-menu {margin:0 40px;}
+.nav-menu li a {padding:15px 25px;}
+.search-from {margin-left:120px;}
+.search-input {width:400px;}
+.user-information {float:right;margin-right:12px;}
+
+/* Register */
+.register {width:330px;margin:150px auto;}
+
+/* Login */
+.login {width:330px;margin:150px auto;}

@@ -44,4 +44,16 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
 		Yaf\Registry::set('db', $db);
 	}
 
+	/**
+	 * 国际化
+	 *
+	 * @todo 额，这个后期再做吧
+	 *
+	 */
+	public function _initTranslator()
+	{
+		$translator = new Zend\I18n\Translator\Translator();
+		Yaf\Registry::set('translator', $translator);
+	}
+
 }
