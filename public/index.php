@@ -23,5 +23,5 @@ define('DEFAULT_USERGROUP_ID', 5);
 define('APP_PATH', 'D:' . DS . 'httproot' . DS . 'gitlist');
 define("PUB_PATH", APP_PATH . DS . 'public' . 'DS');
 
-$app = new Yaf\Application(APP_PATH . '/conf/application.ini');
+$app = new Yaf\Application(APP_PATH . DS . 'conf' . DS . 'application.ini');
 $app->bootstrap()->run();
