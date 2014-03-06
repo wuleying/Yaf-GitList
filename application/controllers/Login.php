@@ -63,8 +63,11 @@ class LoginController extends Local\Controller\Base
 		// 检查密码
 		if ($userInfo['password'] == md5(md5($password) . $userInfo['salt']))
 		{
+			setcookie('email', $userInfo['email'], TIMENOW + 3600, '/');
+			setcookie('password', $userInfo['password'], TIMENOW + 3600, '/');
+			echo $this->getRequest()->getCookie('email');
+			echo $this->getRequest()->getCookie('password');
 			die('登录成功');
-			// @todo 写cookie等
 		}
 		else
 		{
