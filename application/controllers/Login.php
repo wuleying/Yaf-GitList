@@ -13,9 +13,18 @@ class LoginController extends Local\Controller\Base
 	 */
 	public function init()
 	{
+		// 加载模型
 		$this->models = array(
 			'userModel' => new UserModel(),
 		);
+
+		// 用户信息
+		$this->userInfo = $this->getUserInfo();
+
+		if ($this->userInfo)
+		{
+			$this->redirect('/index');
+		}
 	}
 
 	/**
@@ -63,17 +72,15 @@ class LoginController extends Local\Controller\Base
 		// 检查密码
 		if ($userInfo['password'] == md5(md5($password) . $userInfo['salt']))
 		{
-			setcookie('email', $userInfo['email'], TIMENOW + 3600, '/');
-			setcookie('password', $userInfo['password'], TIMENOW + 3600, '/');
-			echo $this->getRequest()->getCookie('email');
-			echo $this->getRequest()->getCookie('password');
-			die('登录成功');
+			Local\Header\Cookies::setCookie('email', $userInfo['email']);
+			Local\Header\Cookies::setCookie('password', $userInfo['password']);
+
+			$this->redirect('/index');
 		}
 		else
 		{
 			die('密码不正确');
 		}
-
 
 		return FALSE;
 	}

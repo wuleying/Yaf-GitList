@@ -10,6 +10,22 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
 	private $_config;
 
 	/**
+	 * 常量
+	 *
+	 */
+	public function _initConstant()
+	{
+		// 项目URL
+		define('SYSTEMURL', $this->_config->application->baseUrl);
+
+		// 默认用户组ID
+		define('DEFAULT_USERGROUP_ID', 5);
+
+		// Cookies 超时时间
+		define('COOKIE_TIMEOUT', TIMENOW + 3600);
+	}
+
+	/**
 	 * 初始化配置项
 	 *
 	 */
@@ -54,6 +70,17 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
 	{
 		$translator = new Zend\I18n\Translator\Translator();
 		Yaf\Registry::set('translator', $translator);
+	}
+
+	/**
+	 * 获取用户信息
+	 *
+	 * @todo 没有做完
+	 *
+	 */
+	public function _initUserInfo()
+	{
+		$userModel = new \UserModel();
 	}
 
 }

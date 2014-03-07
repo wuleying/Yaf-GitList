@@ -33,9 +33,7 @@
 		</form>
 
 		<ul class="nav navbar-nav user-information">
-			<li><a href="<?php echo SYSTEMURL;?>/register">注册</a></li>
-			<li><a href="<?php echo SYSTEMURL;?>/login">登录</a></li>
-			<!--
+			<?php if($this->userInfo) : ?>
 			  <li class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">罗亮亮<b class="caret"></b></a>
 				<ul class="dropdown-menu">
@@ -46,7 +44,10 @@
 				  <li><a href="#">退出</a></li>
 				</ul>
 			  </li>
-			  -->
+			<?php else: ?>
+				<li><a href="<?php echo SYSTEMURL;?>/register">注册</a></li>
+				<li><a href="<?php echo SYSTEMURL;?>/login">登录</a></li>
+			<?php endif; ?>
 		</ul>
 	</div>
   </div>
