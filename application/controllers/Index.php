@@ -17,10 +17,6 @@ class IndexController extends Local\Controller\Base
 		$this->models = array(
 			'userModel' => new UserModel(),
 		);
-
-		// 用户信息
-		$this->userInfo = $this->getUserInfo();
-		$this->getView()->assign('userInfo', $this->userInfo);
 	}
 
 	/**
@@ -29,12 +25,6 @@ class IndexController extends Local\Controller\Base
 	 */
 	public function indexAction()
 	{
-		/**
-		  $userModel = new UserModel();
-		  $x = $userModel->getAllUsers();
-		  print_r($x);
-		 *
-		 */
 		$title = '首页';
 		$this->getView()->assign('title', $title);
 	}

@@ -20,7 +20,7 @@ class ErrorController extends Yaf\Controller_Abstract
 			'code' => $exception->getCode(),
 			'message' => $exception->getMessage()
 		);
-		$this->_view->assign('message', $message);
+		$this->_view->assign('exception', $exception);
 	}
 
 }

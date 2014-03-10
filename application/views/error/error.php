@@ -1,6 +1,9 @@
+<?php $this->display('header.php'); ?>
+
 <div>
 	<h1>错误信息</h1>
-	<h2><?php echo $message['file']; ?> <?php echo $message['line']; ?> 行</h2>
-	<p><?php echo $message['message']; ?></p>
+	<h2><?php echo $exception->getFile(); ?> <?php echo $exception->getLine(); ?> 行，错误号：<?php echo $exception->getCode(); ?></h2>
+	<p><?php echo $exception->getMessage(); ?></p>
 </div>
 
+<?php $this->display('footer.php'); ?>

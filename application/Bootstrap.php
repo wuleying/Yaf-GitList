@@ -10,22 +10,6 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
 	private $_config;
 
 	/**
-	 * 常量
-	 *
-	 */
-	public function _initConstant()
-	{
-		// 项目URL
-		define('SYSTEMURL', $this->_config->application->baseUrl);
-
-		// 默认用户组ID
-		define('DEFAULT_USERGROUP_ID', 5);
-
-		// Cookies 超时时间
-		define('COOKIE_TIMEOUT', TIMENOW + 3600);
-	}
-
-	/**
 	 * 初始化配置项
 	 *
 	 */
@@ -45,6 +29,22 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
 			'Zend',
 			'Local'
 		));
+	}
+
+	/**
+	 * 注册常量
+	 *
+	 */
+	public function _initConstant()
+	{
+		// 项目URL
+		define('SYSTEMURL', $this->_config->application->baseUrl);
+
+		// Cookies 超时时间
+		define('COOKIE_TIMEOUT', (TIMENOW + $this->_config->cookies->timeout));
+
+		// 默认用户组ID
+		define('DEFAULT_USERGROUP_ID', $this->_config->users->default->groupid);
 	}
 
 	/**
@@ -75,12 +75,10 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
 	/**
 	 * 获取用户信息
 	 *
-	 * @todo 没有做完
-	 *
 	 */
 	public function _initUserInfo()
 	{
-		$userModel = new \UserModel();
+		$userModel = new UserModel();
 	}
 
 }

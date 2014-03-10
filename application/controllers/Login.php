@@ -17,14 +17,6 @@ class LoginController extends Local\Controller\Base
 		$this->models = array(
 			'userModel' => new UserModel(),
 		);
-
-		// 用户信息
-		$this->userInfo = $this->getUserInfo();
-
-		if ($this->userInfo)
-		{
-			$this->redirect('/index');
-		}
 	}
 
 	/**
