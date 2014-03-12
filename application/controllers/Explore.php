@@ -10,13 +10,30 @@
  */
 class ExploreController extends Yaf\Controller_Abstract
 {
+
 	/**
-	 * 新用户注册
+	 * 初始化方法
+	 *
+	 */
+	public function init()
+	{
+		// 加载模型
+		$this->models = array(
+		);
+
+		// 用户信息
+		$this->userInfo = \Yaf\Registry::get('userInfo');
+		$this->getView()->assign('userInfo', $this->userInfo);
+	}
+
+	/**
+	 * 发现
 	 *
 	 */
 	public function indexAction()
 	{
-		$title = '新用户注册';
+		$title = '发现';
 		$this->getView()->assign('title', $title);
 	}
+
 }

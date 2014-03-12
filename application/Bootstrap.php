@@ -48,6 +48,28 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
 	}
 
 	/**
+	 * 自定义路由
+	 *
+	 */
+	public function _initRouter()
+	{
+		$router = Yaf\Dispatcher::getInstance()->getRouter();
+		$routes = array(
+			'people' => new Yaf\Route\Regex(
+					'/\/people\/([^\/]+)/i', array(
+				'controller' => 'people',
+				'action' => 'view'), array(
+				1 => 'email')
+			),
+		);
+
+		foreach ($routes as $routekey => $route)
+		{
+			$router->addRoute($routekey, $route);
+		}
+	}
+
+	/**
 	 * 连接数据库，设置数据库适配器
 	 *
 	 */
@@ -79,6 +101,31 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
 	public function _initUserInfo()
 	{
 		$userModel = new UserModel();
+		$httpRequest = new Yaf\Request\Http();
+		// 获取cookies
+		$email = $httpRequest->getCookie('email');
+		$password = $httpRequest->getCookie('password');
+		$userInfo = array();
+
+		if ($email)
+		{
+			// 查询用户信息
+			$userInfoQuery = $userModel->getUserByEmail($email);
+
+			if ($userInfoQuery['password'] == $password)
+			{
+				$userInfo = $userInfoQuery;
+			}
+			else
+			{
+				// 清除 Cookies
+				Local\Header\Cookies::clearCookie('email');
+				Local\Header\Cookies::clearCookie('password');
+			}
+			unset($userInfoQuery);
+		}
+
+		Yaf\Registry::set('userInfo', $userInfo);
 	}
 
 }

@@ -22,4 +22,15 @@ class Cookies
 		setcookie($name, $value, COOKIE_TIMEOUT, '/');
 	}
 
+	/**
+	 * 清除 Cookies
+	 *
+	 * @param string $name
+	 *
+	 */
+	public static function clearCookie($name)
+	{
+		setcookie($name, '', TIMENOW - 3600, '/');
+	}
+
 }

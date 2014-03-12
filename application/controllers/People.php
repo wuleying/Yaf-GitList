@@ -1,10 +1,10 @@
 <?php
 
 /**
- * 首页
+ * 用户主页控制器
  *
  */
-class IndexController extends Local\Controller\Base
+class PeopleController extends Local\Controller\Base
 {
 
 	/**
@@ -19,13 +19,15 @@ class IndexController extends Local\Controller\Base
 	}
 
 	/**
-	 * 首页
+	 * 查看用户信息
 	 *
 	 */
-	public function indexAction()
+	public function viewAction()
 	{
-		$title = '首页';
-		$this->getView()->assign('title', $title);
+		$email = $this->getRequest()->getParam('email');
+		echo $email;
+		die();
+		return FALSE;
 	}
 
 }

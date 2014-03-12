@@ -37,11 +37,11 @@
 			  <li class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">罗亮亮<b class="caret"></b></a>
 				<ul class="dropdown-menu">
-				  <li><a href="#">我的主页</a></li>
-				  <li><a href="#">私信</a></li>
-				  <li><a href="#">设置</a></li>
+				  <li><a href="<?php echo SYSTEMURL;?>/people/<?php echo $this->userInfo['email'];?>">我的主页</a></li>
+				  <li><a href="<?php echo SYSTEMURL;?>/inbox">私信</a></li>
+				  <li><a href="<?php echo SYSTEMURL;?>/settings/account">设置</a></li>
 				  <li class="divider"></li>
-				  <li><a href="#">退出</a></li>
+				  <li><a href="<?php echo SYSTEMURL;?>/logout">退出</a></li>
 				</ul>
 			  </li>
 			<?php else: ?>

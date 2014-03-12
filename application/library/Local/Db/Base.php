@@ -21,7 +21,7 @@ class Base
 	 */
 	public function __construct()
 	{
-		$this->db = \Yaf\Registry::get("db");
+		$this->db = \Yaf\Registry::get('db');
 	}
 
 	/**

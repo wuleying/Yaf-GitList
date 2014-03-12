@@ -10,13 +10,31 @@
  */
 class SearchController extends Yaf\Controller_Abstract
 {
+
 	/**
-	 * 新用户注册
+	 * 初始化方法
+	 *
+	 */
+	public function init()
+	{
+		// 加载模型
+		$this->models = array(
+			'userModel' => new UserModel(),
+		);
+
+		// 用户信息
+		$this->userInfo = \Yaf\Registry::get('userInfo');
+		$this->getView()->assign('userInfo', $this->userInfo);
+	}
+
+	/**
+	 * 搜索
 	 *
 	 */
 	public function indexAction()
 	{
-		$title = '新用户注册';
+		$title = '搜索';
 		$this->getView()->assign('title', $title);
 	}
+
 }
