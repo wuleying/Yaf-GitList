@@ -69,7 +69,7 @@ class AdminController extends Local\Controller\Base
 	 * 执行管理员登录
 	 *
 	 * @return boolean
-	 * 
+	 *
 	 */
 	public function accountAction()
 	{
@@ -113,6 +113,7 @@ class AdminController extends Local\Controller\Base
 						USERGROUP_ID_ADMIN
 					)))
 			{
+				// 写入 Cookies
 				Local\Header\Cookies::setCookie('email', $adminInfo['email']);
 				Local\Header\Cookies::setCookie('password', $adminInfo['password']);
 				Local\Header\Cookies::setCookie('adminemail', $adminInfo['email']);
@@ -150,7 +151,6 @@ class AdminController extends Local\Controller\Base
 		Yaf\Registry::del('userInfo');
 
 		$this->redirect('/admin/login');
-
 
 		return FALSE;
 	}

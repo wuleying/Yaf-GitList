@@ -75,8 +75,12 @@ class LoginController extends Local\Controller\Base
 		// 检查密码
 		if ($userInfo['password'] == md5(md5($password) . $userInfo['salt']))
 		{
+			// 写入 Cookies
 			Local\Header\Cookies::setCookie('email', $userInfo['email']);
 			Local\Header\Cookies::setCookie('password', $userInfo['password']);
+
+			// 更新最后登录时间
+			$this->models['userModel']->updateLastLoginTime($userInfo['userid']);
 
 			$this->redirect('/index');
 		}

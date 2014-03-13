@@ -97,6 +97,18 @@ class Base
 	}
 
 	/**
+	 * 查询，用于 Insert/Updata/Delete
+	 *
+	 * @param string $sql
+	 *
+	 */
+	protected function queryWrite($sql)
+	{
+		$query = $this->db->query($sql);
+		$query->execute();
+	}
+
+	/**
 	 * 保存/更新数据
 	 *
 	 * @param string $table

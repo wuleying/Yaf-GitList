@@ -65,10 +65,30 @@ class UserModel extends Local\Db\Base
 	}
 
 	/**
+	 * 更新用户最后登录时间
+	 *
+	 * @param integer $userid
+	 *
+	 */
+	public function updateLastLoginTime($userid)
+	{
+		if (empty($userid))
+		{
+			return;
+		}
+
+		$this->queryWrite("
+			UPDATE " . $this->q($this->table) . " SET
+				lasttime = " . TIMENOW . "
+			WHERE userid = {$userid}
+		");
+	}
+
+	/**
 	 * 获取管理员信息
 	 *
 	 * @return array
-	 * 
+	 *
 	 */
 	public function getAdminInfo()
 	{
