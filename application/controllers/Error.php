@@ -1,10 +1,12 @@
 <?php
 
 /**
- * 错误页
+ * 错误控制器
+ *
+ * @author $Author: 5590548@qq.com $
  *
  */
-class ErrorController extends Yaf\Controller_Abstract
+class ErrorController extends Local\Controller\Base
 {
 
 	/**
@@ -14,12 +16,6 @@ class ErrorController extends Yaf\Controller_Abstract
 	 */
 	public function errorAction($exception)
 	{
-		$message = array(
-			'file' => $exception->getFile(),
-			'line' => $exception->getLine(),
-			'code' => $exception->getCode(),
-			'message' => $exception->getMessage()
-		);
 		$this->_view->assign('exception', $exception);
 	}
 

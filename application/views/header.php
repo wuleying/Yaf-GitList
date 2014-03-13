@@ -20,9 +20,9 @@
 	</div>
 	<div class="navbar-collapse collapse">
 		<ul class="nav navbar-nav nav-menu">
-			<li class="active"><a href="<?php echo SYSTEMURL;?>">首页</a></li>
-			<li><a href="<?php echo SYSTEMURL;?>/category">分类</a></li>
-			<li><a href="<?php echo SYSTEMURL;?>/explore">发现</a></li>
+			<li<?php if ('Index' == $controllerName) : ?> class="active"<?php endif; ?>><a href="<?php echo SYSTEMURL;?>">首页</a></li>
+			<li<?php if ('Category' == $controllerName) : ?> class="active"<?php endif; ?>><a href="<?php echo SYSTEMURL;?>/category">分类</a></li>
+			<li<?php if ('Explore' == $controllerName) : ?> class="active"<?php endif; ?>><a href="<?php echo SYSTEMURL;?>/explore">发现</a></li>
 		</ul>
 
 		<form class="navbar-form navbar-left search-from" role="search" method="get" action="<?php echo SYSTEMURL;?>/search">
@@ -35,7 +35,7 @@
 		<ul class="nav navbar-nav user-information">
 			<?php if($this->userInfo) : ?>
 			  <li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">罗亮亮<b class="caret"></b></a>
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown" title="<?php echo $this->userInfo['email'];?>"><?php echo $this->userInfo['email'];?><b class="caret"></b></a>
 				<ul class="dropdown-menu">
 				  <li><a href="<?php echo SYSTEMURL;?>/people/<?php echo $this->userInfo['email'];?>">我的主页</a></li>
 				  <li><a href="<?php echo SYSTEMURL;?>/inbox">私信</a></li>

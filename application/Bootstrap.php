@@ -3,6 +3,8 @@
 /**
  * 引导文件
  *
+ * @author $Author: 5590548@qq.com $
+ *
  */
 class Bootstrap extends Yaf\Bootstrap_Abstract
 {
@@ -43,8 +45,11 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
 		// Cookies 超时时间
 		define('COOKIE_TIMEOUT', (TIMENOW + $this->_config->cookies->timeout));
 
-		// 默认用户组ID
-		define('DEFAULT_USERGROUP_ID', $this->_config->users->default->groupid);
+		// 用户组ID
+		foreach ($this->_config->users->groupid as $groupName => $groupid)
+		{
+			define('USERGROUP_ID_' . strtoupper($groupName), $groupid);
+		}
 	}
 
 	/**

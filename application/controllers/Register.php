@@ -3,6 +3,8 @@
 /**
  * 用户注册控制器
  *
+ * @author $Author: 5590548@qq.com $
+ *
  */
 class RegisterController extends Local\Controller\Base
 {

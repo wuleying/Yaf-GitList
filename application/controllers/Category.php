@@ -3,8 +3,10 @@
 /**
  * 分类控制器
  *
+ * @author $Author: 5590548@qq.com $
+ *
  */
-class CategoryController extends Yaf\Controller_Abstract
+class CategoryController extends Local\Controller\Base
 {
 
 	/**
@@ -20,6 +22,9 @@ class CategoryController extends Yaf\Controller_Abstract
 		// 用户信息
 		$this->userInfo = \Yaf\Registry::get('userInfo');
 		$this->getView()->assign('userInfo', $this->userInfo);
+
+		// 控制器名称
+		$this->getView()->assign('controllerName', $this->getRequest()->getControllerName());
 	}
 
 	/**

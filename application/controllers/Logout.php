@@ -1,7 +1,9 @@
 <?php
 
 /**
- * 用户登录控制器
+ * 用户注销控制器
+ *
+ * @author $Author: 5590548@qq.com $
  *
  */
 class LogoutController extends Local\Controller\Base
@@ -33,7 +35,7 @@ class LogoutController extends Local\Controller\Base
 		Local\Header\Cookies::clearCookie('email');
 		Local\Header\Cookies::clearCookie('password');
 		// 删除全局数据
-		Yaf_Registry::del('userInfo');
+		Yaf\Registry::del('userInfo');
 
 		$this->redirect('/index');
 

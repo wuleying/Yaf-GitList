@@ -1,7 +1,9 @@
 <?php
 
 /**
- * 首页
+ * 首页控制器
+ *
+ * @author $Author: 5590548@qq.com $
  *
  */
 class IndexController extends Local\Controller\Base
@@ -16,6 +18,8 @@ class IndexController extends Local\Controller\Base
 		// 用户信息
 		$this->userInfo = \Yaf\Registry::get('userInfo');
 		$this->getView()->assign('userInfo', $this->userInfo);
+		// 控制器名称
+		$this->getView()->assign('controllerName', $this->getRequest()->getControllerName());
 	}
 
 	/**

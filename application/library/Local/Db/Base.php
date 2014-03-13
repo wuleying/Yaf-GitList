@@ -3,6 +3,8 @@
 /**
  * 模型基类
  *
+ * @author $Author: 5590548@qq.com $
+ *
  */
 
 namespace Local\Db;

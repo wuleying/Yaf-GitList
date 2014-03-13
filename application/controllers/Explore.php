@@ -3,12 +3,10 @@
 /**
  * 发现控制器
  *
- * @version $Revision: 6 $
- * @date $Date: 2014-02-28 15:38:19 +0800 (周五, 28 二月 2014) $
  * @author $Author: 5590548@qq.com $
  *
  */
-class ExploreController extends Yaf\Controller_Abstract
+class ExploreController extends Local\Controller\Base
 {
 
 	/**
@@ -24,6 +22,9 @@ class ExploreController extends Yaf\Controller_Abstract
 		// 用户信息
 		$this->userInfo = \Yaf\Registry::get('userInfo');
 		$this->getView()->assign('userInfo', $this->userInfo);
+
+		// 控制器名称
+		$this->getView()->assign('controllerName', $this->getRequest()->getControllerName());
 	}
 
 	/**

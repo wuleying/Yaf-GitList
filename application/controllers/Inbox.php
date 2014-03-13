@@ -1,12 +1,12 @@
 <?php
 
 /**
- * 用户主页控制器
+ * 私信控制器
  *
  * @author $Author: 5590548@qq.com $
  *
  */
-class PeopleController extends Local\Controller\Base
+class InboxController extends Local\Controller\Base
 {
 
 	/**
@@ -21,14 +21,12 @@ class PeopleController extends Local\Controller\Base
 	}
 
 	/**
-	 * 查看用户信息
+	 * 私信首页
 	 *
 	 */
-	public function viewAction()
+	public function indexAction()
 	{
-		$email = $this->getRequest()->getParam('email');
-
-		$title = $email;
+		$title = '私信';
 		$this->getView()->assign('title', $title);
 	}
 

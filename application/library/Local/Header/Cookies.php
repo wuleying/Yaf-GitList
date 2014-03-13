@@ -3,6 +3,8 @@
 /**
  * Cookies 类
  *
+ * @author $Author: 5590548@qq.com $
+ *
  */
 
 namespace Local\Header;

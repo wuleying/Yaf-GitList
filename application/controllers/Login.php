@@ -3,6 +3,8 @@
 /**
  * 用户登录控制器
  *
+ * @author $Author: 5590548@qq.com $
+ *
  */
 class LoginController extends Local\Controller\Base
 {
