@@ -38,15 +38,14 @@ class AdminController extends Local\Controller\Base
 		{
 			$this->redirect('/admin/login');
 		}
-	}
 
-	/**
-	 * 管理员首页
-	 *
-	 */
-	public function indexAction()
-	{
-
+		if (!empty($this->_adminInfo))
+		{
+			// 管理员信息
+			$this->getView()->assign('adminInfo', $this->_adminInfo);
+			// 动作名称
+			$this->getView()->assign('actionName', $this->getRequest()->getActionName());
+		}
 	}
 
 	/**
@@ -153,6 +152,46 @@ class AdminController extends Local\Controller\Base
 		$this->redirect('/admin/login');
 
 		return FALSE;
+	}
+
+	/**
+	 * 管理员首页
+	 *
+	 */
+	public function indexAction()
+	{
+		$title = '管理首页';
+		$this->getView()->assign('title', $title);
+	}
+
+	/**
+	 * 内容管理
+	 *
+	 */
+	public function contentAction()
+	{
+		$title = '内容管理';
+		$this->getView()->assign('title', $title);
+	}
+
+	/**
+	 * 用户管理
+	 *
+	 */
+	public function userAction()
+	{
+		$title = '用户管理';
+		$this->getView()->assign('title', $title);
+	}
+
+	/**
+	 * 系统设置
+	 *
+	 */
+	public function settingAction()
+	{
+		$title = '系统设置';
+		$this->getView()->assign('title', $title);
 	}
 
 }

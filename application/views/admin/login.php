@@ -1,5 +1,18 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="description" content=""/>
+<title><?php echo $title; ?> - Github 优秀项目推荐</title>
+<link rel="stylesheet" href="<?php echo SYSTEMURL;?>/css/bootstrap.min.css" type="text/css" media="screen,print" />
+<link rel="stylesheet" href="<?php echo SYSTEMURL;?>/css/admin.css" type="text/css" media="screen,print" />
+<script src="<?php echo SYSTEMURL;?>/js/jquery.min.js"></script>
+<script src="<?php echo SYSTEMURL;?>/js/bootstrap.min.js"></script>
+</head>
+<body>
 
-	<div class="login">
+	<div class="adminlogin">
 		<form class="form-signin" role="form" method="post" action="<?php echo SYSTEMURL;?>/admin/account">
 			<h2 class="form-signin-heading"><?php echo $title; ?></h2>
 			<input type="text" name="email" class="form-control" placeholder="邮箱" required autofocus />
@@ -7,3 +20,6 @@
 			<button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
 		</form>
 	</div>
+
+</body>
+</html>
