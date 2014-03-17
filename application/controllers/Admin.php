@@ -11,6 +11,8 @@ class AdminController extends Local\Controller\Base
 
 	// 管理员信息
 	private $_adminInfo = array();
+	// 执行的动作
+	private $_actionName;
 
 	/**
 	 * 初始化方法
@@ -43,8 +45,10 @@ class AdminController extends Local\Controller\Base
 		{
 			// 管理员信息
 			$this->getView()->assign('adminInfo', $this->_adminInfo);
+
 			// 动作名称
-			$this->getView()->assign('actionName', $this->getRequest()->getActionName());
+			$this->_actionName = $this->getRequest()->getActionName();
+			$this->getView()->assign('actionName', $this->_actionName);
 		}
 	}
 
@@ -160,8 +164,7 @@ class AdminController extends Local\Controller\Base
 	 */
 	public function indexAction()
 	{
-		$title = '管理首页';
-		$this->getView()->assign('title', $title);
+		$this->_pageInfo('管理首页');
 	}
 
 	/**
@@ -170,8 +173,16 @@ class AdminController extends Local\Controller\Base
 	 */
 	public function contentAction()
 	{
-		$title = '内容管理';
-		$this->getView()->assign('title', $title);
+		$this->_pageInfo('内容管理');
+	}
+
+	/**
+	 * 用户组管理
+	 *
+	 */
+	public function usergroupAction()
+	{
+		$this->_pageInfo('用户组管理');
 	}
 
 	/**
@@ -180,8 +191,37 @@ class AdminController extends Local\Controller\Base
 	 */
 	public function userAction()
 	{
-		$title = '用户管理';
-		$this->getView()->assign('title', $title);
+		$page = $this->getRequest()->getParam('page');
+		$page = max(1, $page);
+
+		// 获取用户数量
+		$userCount = $this->models['userModel']->getAllUsersCount();
+		// 查询偏移量
+		$offset = ($page - 1) * PERPAGE;
+		// 总页数
+		$pageTotal = ceil($userCount / PERPAGE);
+
+		// 获取用户数据
+		$users = $this->models['userModel']->getAllUsers(0, 'lasttime DESC', $offset, PERPAGE);
+
+		$this->getView()->assign('users', $users);
+		$this->getView()->assign('pageNav', Local\Util\Page::pageNav($page, $pageTotal, ADMINURL . '/user'));
+
+		$this->_pageInfo('用户管理');
+	}
+
+	/**
+	 * 编辑用户信息
+	 *
+	 * @param integer $id
+	 *
+	 */
+	public function usereditAction($id)
+	{
+		$title = '编辑用户';
+		$breadCrumb[ADMINURL . '/user'] = '用户管理';
+		$breadCrumb[] = $title;
+		$this->_pageInfo($title, $breadCrumb);
 	}
 
 	/**
@@ -190,8 +230,32 @@ class AdminController extends Local\Controller\Base
 	 */
 	public function settingAction()
 	{
-		$title = '系统设置';
+		$this->_pageInfo('系统设置');
+	}
+
+	/**
+	 * 页面信息
+	 *
+	 * @param string $title
+	 *
+	 */
+	private function _pageInfo($title, $breadCrumb = array())
+	{
 		$this->getView()->assign('title', $title);
+		$breadCrumbArray[ADMINURL] = '控制台';
+		// 面包屑导航
+		if (empty($breadCrumb))
+		{
+			$breadCrumbArray[] = $title;
+		}
+		else
+		{
+			foreach ($breadCrumb as $key => $value)
+			{
+				$breadCrumbArray[$key] = $value;
+			}
+		}
+		$this->getView()->assign('breadCrumb', Local\Util\Page::breadCrumb($breadCrumbArray));
 	}
 
 }

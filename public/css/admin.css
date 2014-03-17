@@ -1,4 +1,14 @@
+/* Admin Login */
 .adminlogin {width:330px;margin:150px auto;}
 
+/* Navbar */
 .nav-menu {margin:0 40px;}
 .nav-menu li a {padding:15px 25px;}
+
+/* Sidebar */
+#sidebar {width:240px;}
+
+/* Admin Main */
+.adminmain {}
+.rightbox {width:100%;padding-left:240px;padding-right:16px;}
+.rightmain {width:100%;}

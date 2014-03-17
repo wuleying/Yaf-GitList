@@ -17,12 +17,44 @@ class UserModel extends Local\Db\Base
 	 * @return array
 	 *
 	 */
-	public function getAllUsers()
+	public function getAllUsers($usergroupid = 0, $orderby = 'lasttime DESC', $offset = 0, $limit = 20)
 	{
+		$where = '';
+		if ($usergroupid)
+		{
+			$where = "WHERE usergroupid =  " . $this->q($usergroupid);
+		}
+
 		return $this->queryArray("
 			SELECT
 				*
 			FROM " . $this->q($this->table) . "
+			{$where}
+			ORDER BY {$orderby}
+			LIMIT {$offset}, {$limit}
+		");
+	}
+
+	/**
+	 * 获取所有用户数量
+	 *
+	 * @param integer $usergroupid
+	 * @return integer
+	 *
+	 */
+	public function getAllUsersCount($usergroupid = 0)
+	{
+		$where = '';
+		if ($usergroupid)
+		{
+			$where = "WHERE usergroupid =  " . $this->q($usergroupid);
+		}
+
+		return $this->queryOne("
+			SELECT
+				COUNT(*)
+			FROM " . $this->q($this->table) . "
+			{$where}
 		");
 	}
 
@@ -53,8 +85,7 @@ class UserModel extends Local\Db\Base
 	 */
 	public function newUser($email, $password)
 	{
-		// @todo $salt 需要写方法
-		$salt = 'abcd';
+		$salt = Local\Util\String::randString();
 		$this->saveData($this->table, array(
 			'usergroupid' => USERGROUP_ID_GENER,
 			'email' => $email,

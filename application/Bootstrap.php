@@ -41,9 +41,14 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
 	{
 		// 项目URL
 		define('SYSTEMURL', $this->_config->application->baseUrl);
+		// 管理后台URL
+		define('ADMINURL', SYSTEMURL . '/admin');
 
 		// Cookies 超时时间
 		define('COOKIE_TIMEOUT', (TIMENOW + $this->_config->cookies->timeout));
+
+		// 默认分页数
+		define('PERPAGE', $this->_config->pages->perpage);
 
 		// 用户组ID
 		foreach ($this->_config->users->groupid as $groupName => $groupid)

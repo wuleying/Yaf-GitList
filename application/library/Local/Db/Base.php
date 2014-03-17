@@ -97,6 +97,18 @@ class Base
 	}
 
 	/**
+	 * 查询单个字段
+	 *
+	 * @param string $sql
+	 * @return string
+	 */
+	protected function queryOne($sql)
+	{
+		$result = $this->queryFirst($sql);
+		return current($result);
+	}
+
+	/**
 	 * 查询，用于 Insert/Updata/Delete
 	 *
 	 * @param string $sql
