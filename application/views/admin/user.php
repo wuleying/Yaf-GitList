@@ -1,4 +1,4 @@
-<?php $this->display('admin/header.php'); ?>
+<?php $this->display('layouts/adminheader.php'); ?>
 
 	<table class="table clearfix">
 		<thead>
@@ -29,4 +29,4 @@
 
 	<?php echo $pageNav;?>
 
-<?php $this->display('admin/footer.php'); ?>
+<?php $this->display('layouts/adminfooter.php'); ?>

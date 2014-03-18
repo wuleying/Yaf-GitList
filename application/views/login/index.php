@@ -1,4 +1,4 @@
-<?php $this->display('header.php'); ?>
+<?php $this->display('layouts/header.php'); ?>
 
 	<div class="login">
 		<form class="form-signin" role="form" method="post" action="<?php echo SYSTEMURL;?>/login/account">
@@ -9,4 +9,4 @@
 		</form>
 	</div>
 
-<?php $this->display('footer.php'); ?>
+<?php $this->display('layouts/footer.php'); ?>

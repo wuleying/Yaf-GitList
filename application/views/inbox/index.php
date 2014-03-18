@@ -1,4 +1,4 @@
-<?php $this->display('header.php'); ?>
+<?php $this->display('layouts/header.php'); ?>
 
 
-<?php $this->display('footer.php'); ?>
+<?php $this->display('layouts/footer.php'); ?>
