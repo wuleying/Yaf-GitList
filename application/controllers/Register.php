@@ -65,7 +65,7 @@ class RegisterController extends Local\Controller\Base
 			die('邮箱格式不正确');
 		}
 
-		if (strlen($password) < 6 || strlen($password) > 16)
+		if (strlen($password) < USER_PASSWORD_MIN || strlen($password) > USER_PASSWORD_MAX)
 		{
 			die('密码长度不正确');
 		}

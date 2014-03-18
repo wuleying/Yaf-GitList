@@ -6,7 +6,8 @@
 <meta name="description" content=""/>
 <title><?php echo $title; ?> - Github 优秀项目推荐</title>
 <link rel="stylesheet" href="<?php echo SYSTEMURL;?>/css/bootstrap.min.css" type="text/css" media="screen,print" />
-<link rel="stylesheet" href="<?php echo SYSTEMURL;?>/css/base.css" type="text/css" media="screen,print" />
+<link rel="stylesheet" href="<?php echo SYSTEMURL;?>/css/common.css" type="text/css" media="screen,print" />
+<link rel="stylesheet" href="<?php echo SYSTEMURL;?>/css/site.css" type="text/css" media="screen,print" />
 <script src="<?php echo SYSTEMURL;?>/js/jquery.min.js"></script>
 <script src="<?php echo SYSTEMURL;?>/js/bootstrap.min.js"></script>
 </head>

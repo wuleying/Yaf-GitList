@@ -69,7 +69,7 @@ class Base
 	 * @return array
 	 *
 	 */
-	protected function queryArray($sql)
+	public function queryArray($sql)
 	{
 		$result = $this->queryResult($sql);
 
@@ -89,7 +89,7 @@ class Base
 	 * @return array
 	 *
 	 */
-	protected function queryFirst($sql)
+	public function queryFirst($sql)
 	{
 		$result = $this->queryResult($sql);
 		$row = $result->current();
@@ -102,7 +102,7 @@ class Base
 	 * @param string $sql
 	 * @return string
 	 */
-	protected function queryOne($sql)
+	public function queryOne($sql)
 	{
 		$result = $this->queryFirst($sql);
 		return current($result);
@@ -114,7 +114,7 @@ class Base
 	 * @param string $sql
 	 *
 	 */
-	protected function queryWrite($sql)
+	public function queryWrite($sql)
 	{
 		$query = $this->db->query($sql);
 		$query->execute();
@@ -123,12 +123,11 @@ class Base
 	/**
 	 * 保存/更新数据
 	 *
-	 * @param string $table
 	 * @param array $data
 	 * @return integer
 	 *
 	 */
-	protected function saveData($table, $data)
+	public function saveData($data)
 	{
 		if (empty($data))
 		{
@@ -137,8 +136,8 @@ class Base
 
 		$db = & $this->db;
 		$sql = array();
-		$id = $data[$table . 'id'];
-		unset($data[$table . 'id']);
+		$id = $data[$this->table . 'id'];
+		unset($data[$this->table . 'id']);
 
 		foreach ($data as $key => $value)
 		{
@@ -148,16 +147,16 @@ class Base
 		if (empty($id))
 		{
 			$query = $db->query("
-				INSERT INTO " . $this->q($table) . " SET
+				INSERT INTO " . $this->q($this->table) . " SET
 				" . implode(',', $sql) . "
 			", $db::QUERY_MODE_EXECUTE);
 		}
 		else
 		{
 			$query = $db->query("
-				UPDATE " . $this->q($table) . " SET
+				UPDATE " . $this->q($this->table) . " SET
 				" . implode(',', $sql) . "
-				WHERE {$table}id = {$id}
+				WHERE {$this->table}id = {$id}
 			", $db::QUERY_MODE_EXECUTE);
 		}
 	}

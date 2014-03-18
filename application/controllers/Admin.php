@@ -23,6 +23,7 @@ class AdminController extends Local\Controller\Base
 		// 加载模型
 		$this->models = array(
 			'userModel' => new UserModel(),
+			'userGroupModel' => new UserGroupModel()
 		);
 
 		// 获取管理员信息
@@ -182,7 +183,27 @@ class AdminController extends Local\Controller\Base
 	 */
 	public function usergroupAction()
 	{
+		// 获取用户组信息
+		$userGroups = $this->models['userGroupModel']->getAllUserGroups();
+
+		// 写入缓存
+		Local\Util\Cache::setCache(CACHE_PATH . '/usergroup.json', $userGroups);
+
+		$this->getView()->assign('userGroups', $userGroups);
+
 		$this->_pageInfo('用户组管理');
+	}
+
+	/**
+	 * 编辑用户组
+	 *
+	 */
+	public function userGroupEditAction()
+	{
+		$title = '编辑用户组';
+		$breadCrumb[ADMINURL . '/usergroup'] = '用户组管理';
+		$breadCrumb[] = $title;
+		$this->_pageInfo($title, $breadCrumb);
 	}
 
 	/**
@@ -206,6 +227,8 @@ class AdminController extends Local\Controller\Base
 
 		$this->getView()->assign('users', $users);
 		$this->getView()->assign('pageNav', Local\Util\Page::pageNav($page, $pageTotal, ADMINURL . '/user'));
+		// 获取用户组缓存
+		$this->getView()->assign('userGroups', Local\Util\Cache::getCache(CACHE_PATH . '/usergroup.json'));
 
 		$this->_pageInfo('用户管理');
 	}
@@ -216,12 +239,70 @@ class AdminController extends Local\Controller\Base
 	 * @param integer $id
 	 *
 	 */
-	public function usereditAction($id)
+	public function userEditAction($id)
 	{
+		// 获取用户信息
+		$userInfo = $this->models['userModel']->getUserById($id);
+
+		if (empty($userInfo))
+		{
+			die('用户不存在');
+		}
+
+		$this->getView()->assign('userInfo', $userInfo);
+		// 获取用户组缓存
+		$this->getView()->assign('userGroups', Local\Util\Cache::getCache(CACHE_PATH . '/usergroup.json'));
+
 		$title = '编辑用户';
 		$breadCrumb[ADMINURL . '/user'] = '用户管理';
 		$breadCrumb[] = $title;
 		$this->_pageInfo($title, $breadCrumb);
+	}
+
+	/**
+	 * 执行编辑用户信息
+	 *
+	 */
+	public function userEditDoAction()
+	{
+		$data['userid'] = $this->getRequest()->getPost('userid');
+		$data['usergroupid'] = $this->getRequest()->getPost('usergroupid');
+		$password = $this->getRequest()->getPost('password');
+		$repassword = $this->getRequest()->getPost('repassword');
+
+		if (empty($data['userid']))
+		{
+			die('请选择一个用户');
+		}
+
+		if (empty($data['usergroupid']))
+		{
+			die('请选择一个用户组');
+		}
+
+		$userInfo = $this->models['userModel']->getUserById($data['userid']);
+		if (empty($userInfo))
+		{
+			die('用户不存在');
+		}
+
+		// 如果要修改密码
+		if ($password)
+		{
+			if (strlen($password) < USER_PASSWORD_MIN || strlen($password) > USER_PASSWORD_MAX)
+			{
+				die('密码长度不正确');
+			}
+			$data['password'] = md5(md5($password) . $userInfo['salt']);
+		}
+		unset($userInfo);
+
+		// 保存数据
+		$this->models['userModel']->saveData($data);
+
+		$this->redirect('/admin/useredit/id/' . $data['userid']);
+
+		return FALSE;
 	}
 
 	/**

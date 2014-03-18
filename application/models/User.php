@@ -77,6 +77,24 @@ class UserModel extends Local\Db\Base
 	}
 
 	/**
+	 * 根据用户ID获取用户信息
+	 *
+	 * @param integer $userid
+	 * @return array
+	 *
+	 */
+	public function getUserById($userid)
+	{
+		return $this->queryFirst("
+			SELECT
+				*
+			FROM " . $this->q($this->table) . "
+			WHERE userid = {$userid}
+			LIMIT 1
+		");
+	}
+
+	/**
 	 * 注册新用户
 	 *
 	 * @param string $email
@@ -86,7 +104,7 @@ class UserModel extends Local\Db\Base
 	public function newUser($email, $password)
 	{
 		$salt = Local\Util\String::randString();
-		$this->saveData($this->table, array(
+		$this->saveData(array(
 			'usergroupid' => USERGROUP_ID_GENER,
 			'email' => $email,
 			'password' => md5(md5($password) . $salt),

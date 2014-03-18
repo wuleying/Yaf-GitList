@@ -44,11 +44,18 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
 		// 管理后台URL
 		define('ADMINURL', SYSTEMURL . '/admin');
 
+		// 缓存文件保存路径
+		define('CACHE_PATH', $this->_config->cache->path);
+
 		// Cookies 超时时间
 		define('COOKIE_TIMEOUT', (TIMENOW + $this->_config->cookies->timeout));
 
 		// 默认分页数
 		define('PERPAGE', $this->_config->pages->perpage);
+
+		// 用户密码长度限制
+		define('USER_PASSWORD_MIN', $this->_config->users->default->minpassword);
+		define('USER_PASSWORD_MAX', $this->_config->users->default->maxpassword);
 
 		// 用户组ID
 		foreach ($this->_config->users->groupid as $groupName => $groupid)
