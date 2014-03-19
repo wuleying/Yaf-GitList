@@ -15,9 +15,7 @@ class PeopleController extends Local\Controller\Base
 	 */
 	public function init()
 	{
-		// 用户信息
-		$this->userInfo = \Yaf\Registry::get('userInfo');
-		$this->getView()->assign('userInfo', $this->userInfo);
+
 	}
 
 	/**

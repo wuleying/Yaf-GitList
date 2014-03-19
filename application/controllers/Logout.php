@@ -15,14 +15,7 @@ class LogoutController extends Local\Controller\Base
 	 */
 	public function init()
 	{
-		// 用户信息
-		$this->userInfo = \Yaf\Registry::get('userInfo');
 
-		// 用户已经登录
-		if ($this->userInfo)
-		{
-			$this->redirect('/index');
-		}
 	}
 
 	/**
@@ -34,6 +27,8 @@ class LogoutController extends Local\Controller\Base
 		// 清除 Cookies
 		Local\Header\Cookies::clearCookie('email');
 		Local\Header\Cookies::clearCookie('password');
+		Local\Header\Cookies::clearCookie('adminemail');
+		Local\Header\Cookies::clearCookie('adminpassword');
 		// 删除全局数据
 		Yaf\Registry::del('userInfo');
 

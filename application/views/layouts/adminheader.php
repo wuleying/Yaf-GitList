@@ -13,6 +13,10 @@
 </head>
 <body>
 
+<?php if(Yaf\Registry::get('setting')['closesite']) : ?>
+	<div class="alert alert-warning text-center siteclosed"><strong>警告</strong> 站点处于关闭中！</div>
+<?php endif;?>
+
 <!-- Navbar -->
 <div class="navbar navbar-default" role="navigation">
 	<div class="navbar-collapse collapse">

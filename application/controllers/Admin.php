@@ -23,7 +23,8 @@ class AdminController extends Local\Controller\Base
 		// 加载模型
 		$this->models = array(
 			'userModel' => new UserModel(),
-			'userGroupModel' => new UserGroupModel()
+			'userGroupModel' => new UserGroupModel(),
+			'settingModel' => new SettingModel()
 		);
 
 		// 获取管理员信息
@@ -186,7 +187,7 @@ class AdminController extends Local\Controller\Base
 		// 获取用户组信息
 		$userGroups = $this->models['userGroupModel']->getAllUserGroups();
 
-		// 写入缓存
+		// 写入缓存 @todo 要移动到编辑用户组ACTION
 		Local\Util\Cache::setCache(CACHE_PATH . '/usergroup.json', $userGroups);
 
 		$this->getView()->assign('userGroups', $userGroups);
@@ -311,6 +312,14 @@ class AdminController extends Local\Controller\Base
 	 */
 	public function settingAction()
 	{
+
+		// 获取系统设置
+		$setting = $this->models['settingModel']->getAllSetting();
+
+		Local\Util\Cache::setCache(CACHE_PATH . '/setting.json', $setting);
+
+		$this->getView()->assign('setting', $setting);
+
 		$this->_pageInfo('系统设置');
 	}
 

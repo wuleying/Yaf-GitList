@@ -13,8 +13,12 @@
 </head>
 <body>
 
+<?php if(Yaf\Registry::get('setting')['closesite']) : ?>
+	<div class="alert alert-warning text-center siteclosed"><strong>警告</strong> 站点处于关闭中！</div>
+<?php endif;?>
+
 <!-- Navbar -->
-<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<div class="navbar navbar-inverse" role="navigation">
   <div class="container">
 	<div class="navbar-header">
 		<a class="navbar-brand" href="<?php echo SYSTEMURL;?>">Github</a>
@@ -34,11 +38,11 @@
 		</form>
 
 		<ul class="nav navbar-nav user-information">
-			<?php if($this->userInfo) : ?>
+			<?php if(Yaf\Registry::get('userInfo')) : ?>
 			  <li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown" title="<?php echo $this->userInfo['email'];?>"><?php echo $this->userInfo['email'];?><b class="caret"></b></a>
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown" title="<?php echo Yaf\Registry::get('userInfo')['email'];?>"><?php echo Yaf\Registry::get('userInfo')['email'];?><b class="caret"></b></a>
 				<ul class="dropdown-menu">
-				  <li><a href="<?php echo SYSTEMURL;?>/people/<?php echo $this->userInfo['email'];?>">我的主页</a></li>
+				  <li><a href="<?php echo SYSTEMURL;?>/people/<?php echo Yaf\Registry::get('userInfo')['email'];?>">我的主页</a></li>
 				  <li><a href="<?php echo SYSTEMURL;?>/inbox">私信 <span class="badge">4</span></a></li>
 				  <li><a href="<?php echo SYSTEMURL;?>/settings/account">设置</a></li>
 				  <li class="divider"></li>

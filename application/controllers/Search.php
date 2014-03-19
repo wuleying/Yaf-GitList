@@ -19,10 +19,6 @@ class SearchController extends Local\Controller\Base
 		$this->models = array(
 			'userModel' => new UserModel(),
 		);
-
-		// 用户信息
-		$this->userInfo = \Yaf\Registry::get('userInfo');
-		$this->getView()->assign('userInfo', $this->userInfo);
 	}
 
 	/**

@@ -12,7 +12,7 @@ class UserGroupModel extends Local\Db\Base
 	protected $table = 'usergroup';
 
 	/**
-	 * 获取所有用户数据
+	 * 获取所有用户组数据
 	 *
 	 * @return array
 	 *

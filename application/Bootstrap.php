@@ -100,6 +100,26 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
 	}
 
 	/**
+	 * 初始化系统设置
+	 *
+	 */
+	public function _initSetttings()
+	{
+		$settings = \Local\Util\Cache::getCache(CACHE_PATH . '/setting.json');
+		$setting = array();
+		if (!empty($settings))
+		{
+			foreach ($settings as $value)
+			{
+				$setting[$value['title']] = $value['value'];
+			}
+		}
+
+		Yaf\Registry::set('setting', $setting);
+		unset($settings, $setting);
+	}
+
+	/**
 	 * 国际化
 	 *
 	 * @todo 额，这个后期再做吧
@@ -109,6 +129,7 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
 	{
 		$translator = new Zend\I18n\Translator\Translator();
 		Yaf\Registry::set('translator', $translator);
+		unset($translator);
 	}
 
 	/**
@@ -143,6 +164,22 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
 		}
 
 		Yaf\Registry::set('userInfo', $userInfo);
+		unset($userInfo);
+	}
+
+	/**
+	 * 检查站点是否关闭
+	 *
+	 */
+	public function _initCheckSiteClosed()
+	{
+		$setting = Yaf\Registry::get('setting');
+		$userInfo = Yaf\Registry::get('userInfo');
+		if ($setting['closesite'] && !in_array($userInfo['usergroupid'], explode(',', $setting['closesiteusergroupid'])))
+		{
+			die($setting['closesitedescription']);
+		}
+		unset($setting, $userInfo);
 	}
 
 }

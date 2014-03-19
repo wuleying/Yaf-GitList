@@ -20,11 +20,8 @@ class RegisterController extends Local\Controller\Base
 			'userModel' => new UserModel(),
 		);
 
-		// 用户信息
-		$this->userInfo = \Yaf\Registry::get('userInfo');
-
 		// 用户已经登录
-		if ($this->userInfo)
+		if (Yaf\Registry::get('userInfo'))
 		{
 			$this->redirect('/index');
 		}
