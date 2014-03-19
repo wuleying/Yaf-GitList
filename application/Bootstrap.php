@@ -105,7 +105,7 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
 	 */
 	public function _initSetttings()
 	{
-		$settings = \Local\Util\Cache::getCache(CACHE_PATH . '/setting.json');
+		$settings = Local\Util\Cache::getCache(CACHE_PATH . '/setting.json');
 		$setting = array();
 		if (!empty($settings))
 		{
