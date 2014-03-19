@@ -173,13 +173,21 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
 	 */
 	public function _initCheckSiteClosed()
 	{
-		$setting = Yaf\Registry::get('setting');
-		$userInfo = Yaf\Registry::get('userInfo');
-		if ($setting['closesite'] && !in_array($userInfo['usergroupid'], explode(',', $setting['closesiteusergroupid'])))
+		if (in_array($_SERVER['REQUEST_URI'], array(
+					'/admin/login',
+					'/admin/account'
+				)))
 		{
-			die($setting['closesitedescription']);
+			return;
 		}
-		unset($setting, $userInfo);
+
+		if (Yaf\Registry::get('setting')['closesite'])
+		{
+			if (!in_array(Yaf\Registry::get('userInfo')['usergroupid'], explode(',', Yaf\Registry::get('setting')['closesiteusergroupid'])))
+			{
+				die(Yaf\Registry::get('setting')['closesitedescription']);
+			}
+		}
 	}
 
 }

@@ -300,9 +300,7 @@ class AdminController extends Local\Controller\Base
 
 		// 保存数据
 		$this->models['userModel']->saveData($data);
-
 		$this->redirect('/admin/useredit/id/' . $data['userid']);
-
 		return FALSE;
 	}
 
@@ -312,15 +310,44 @@ class AdminController extends Local\Controller\Base
 	 */
 	public function settingAction()
 	{
-
 		// 获取系统设置
 		$setting = $this->models['settingModel']->getAllSetting();
+		$this->getView()->assign('settings', $setting);
+		$this->_pageInfo('系统设置');
+	}
 
+	/**
+	 * 编辑系统设置
+	 *
+	 * @return boolean
+	 *
+	 */
+	public function settingEditAction()
+	{
+		$settings = $this->getRequest()->getPost('settings');
+
+		if (!empty($settings))
+		{
+			foreach ($settings as $settingid => $setting)
+			{
+				$settingData = array(
+					'settingid' => $settingid,
+					'value' => $setting['value'],
+					'sort' => $setting['sort']
+				);
+
+				// 更新数据
+				$this->models['settingModel']->saveData($settingData);
+				unset($settingData);
+			}
+		}
+
+		// 更新缓存
+		$setting = $this->models['settingModel']->getAllSetting();
 		Local\Util\Cache::setCache(CACHE_PATH . '/setting.json', $setting);
 
-		$this->getView()->assign('setting', $setting);
-
-		$this->_pageInfo('系统设置');
+		$this->redirect('/admin/setting');
+		return FALSE;
 	}
 
 	/**

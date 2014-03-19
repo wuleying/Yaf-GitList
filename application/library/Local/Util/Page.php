@@ -105,4 +105,40 @@ class Page
 		return $html;
 	}
 
+	/**
+	 * 显示表单元素
+	 *
+	 * @param string $name
+	 * @param mixed $value
+	 * @param integer $type  (0.文本,1.密码,2.单选,3.多选,4.文本域)
+	 *
+	 */
+	public static function displayFormElement($name, $value, $type = 0)
+	{
+		$formElement = '';
+		if (empty($name))
+		{
+			return $formElement;
+		}
+
+		switch ($type)
+		{
+			case 1 :
+				$formElement .= "<input type=\"password\" class=\"form-control\" name=\"{$name}\" value=\"{$value}\" />";
+				break;
+			case 2 :
+				$formElement .= "<input type=\"radio\" name=\"{$name}\" value=\"1\" ". ($value ? 'checked' : '') . " /> 是 ";
+				$formElement .= "<input type=\"radio\" name=\"{$name}\" value=\"0\" ". (!$value ? 'checked' : '') . " /> 否 ";
+				break;
+			case 3 :
+				break;
+			case 4 :
+				$formElement .= "<textarea class=\"form-control\" rows=\"3\" name=\"{$name}\">{$value}</textarea>";
+				break;
+			default :
+				$formElement .= "<input type=\"text\" class=\"form-control\" name=\"{$name}\" value=\"{$value}\" />";
+		}
+		return $formElement;
+	}
+
 }
