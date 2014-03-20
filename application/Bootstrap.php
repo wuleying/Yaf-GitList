@@ -105,7 +105,7 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
 	 */
 	public function _initSetttings()
 	{
-		$settings = Local\Util\Cache::getCache(CACHE_PATH . '/setting.json');
+		$settings = Local\Util\Cache::getCache(CACHE_PATH . DS. 'setting.json');
 		$setting = array();
 		if (!empty($settings))
 		{
@@ -130,6 +130,17 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
 		$translator = new Zend\I18n\Translator\Translator();
 		Yaf\Registry::set('translator', $translator);
 		unset($translator);
+	}
+
+	/**
+	 * 初始化插件
+	 *
+	 * @param Yaf_Dispatcher $dispatcher
+	 */
+	public function _initPlugin(Yaf\Dispatcher $dispatcher)
+	{
+		$site = new SitePlugin();
+		$dispatcher->registerPlugin($site);
 	}
 
 	/**
@@ -165,29 +176,6 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
 
 		Yaf\Registry::set('userInfo', $userInfo);
 		unset($userInfo);
-	}
-
-	/**
-	 * 检查站点是否关闭
-	 *
-	 */
-	public function _initCheckSiteClosed()
-	{
-		if (in_array($_SERVER['REQUEST_URI'], array(
-					'/admin/login',
-					'/admin/account'
-				)))
-		{
-			return;
-		}
-
-		if (Yaf\Registry::get('setting')['closesite'])
-		{
-			if (!in_array(Yaf\Registry::get('userInfo')['usergroupid'], explode(',', Yaf\Registry::get('setting')['closesiteusergroupid'])))
-			{
-				die(Yaf\Registry::get('setting')['closesitedescription']);
-			}
-		}
 	}
 
 }

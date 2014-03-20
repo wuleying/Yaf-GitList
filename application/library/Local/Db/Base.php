@@ -45,7 +45,7 @@ class Base
 	 */
 	protected function e($str)
 	{
-		return $this->db->platform->quoteValue($str);
+		return $this->db->platform->quoteValue(htmlspecialchars($str));
 	}
 
 	/**
