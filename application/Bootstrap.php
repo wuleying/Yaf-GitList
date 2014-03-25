@@ -36,6 +36,7 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
 	/**
 	 * 注册常量
 	 *
+	 *
 	 */
 	public function _initConstant()
 	{
@@ -56,6 +57,9 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
 		// 用户密码长度限制
 		define('USER_PASSWORD_MIN', $this->_config->users->default->minpassword);
 		define('USER_PASSWORD_MAX', $this->_config->users->default->maxpassword);
+
+		// 排序的默认值
+		define('SORT_DEFAULT_VALUE', 99);
 
 		// 用户组ID
 		foreach ($this->_config->users->groupid as $groupName => $groupid)
@@ -105,7 +109,7 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
 	 */
 	public function _initSetttings()
 	{
-		$settings = Local\Util\Cache::getCache(CACHE_PATH . DS. 'setting.json');
+		$settings = Local\Util\Cache::getCache(CACHE_PATH . DS . 'setting.json');
 		$setting = array();
 		if (!empty($settings))
 		{

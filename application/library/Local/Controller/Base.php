@@ -16,4 +16,6 @@ class Base extends \Yaf\Controller_Abstract
 	protected $models = array();
 	// 用户信息
 	protected $userInfo = array();
+	// 管理员信息
+	protected $adminInfo = array();
 }

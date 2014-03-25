@@ -13,7 +13,7 @@
 <body>
 
 	<div class="adminlogin">
-		<form class="form-signin" role="form" method="post" action="<?php echo SYSTEMURL;?>/admin/account">
+		<form class="form-signin" role="form" method="post" action="<?php echo SYSTEMURL;?>/admin/login/account">
 			<h2 class="form-signin-heading"><?php echo $title; ?></h2>
 			<input type="text" name="email" class="form-control" placeholder="邮箱" required autofocus />
 			<input type="password" name="password" maxlength="16" class="form-control" placeholder="密码" required />

@@ -1,4 +1,4 @@
-<?php $this->display('layouts/adminheader.php'); ?>
+<?php $this->display('layouts/header.php'); ?>
 
 	<div class="table-box">
 		<table class="table table-striped table-bordered clearfix">
@@ -15,7 +15,7 @@
 						<td><?php echo $userGroup['usergroupid'];?></td>
 						<td><?php echo $userGroup['groupname'];?></td>
 						<td>
-							<a href="<?php echo ADMINURL?>/usergroupedit/id/<?php echo $userGroup['usergroupid']; ?>">编辑</a>
+							<a href="<?php echo ADMINURL?>/usergroup/edit/id/<?php echo $userGroup['usergroupid']; ?>">编辑</a>
 						</td>
 					</tr>
 				<?php endforeach; ?>
@@ -23,4 +23,4 @@
 		</table>
 	</div>
 
-<?php $this->display('layouts/adminfooter.php'); ?>
+<?php $this->display('layouts/footer.php'); ?>

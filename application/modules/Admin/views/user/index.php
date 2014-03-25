@@ -1,4 +1,4 @@
-<?php $this->display('layouts/adminheader.php'); ?>
+<?php $this->display('layouts/header.php'); ?>
 
 	<div class="table-box">
 		<table class="table table-striped table-bordered clearfix">
@@ -21,7 +21,7 @@
 						<td><?php echo Local\Util\Time::formatDate($user['registrattime']);?></td>
 						<td><?php echo Local\Util\Time::formatDate($user['lasttime']);?></td>
 						<td>
-							<a href="<?php echo ADMINURL?>/useredit/id/<?php echo $user['userid']; ?>">编辑</a>
+							<a href="<?php echo ADMINURL?>/user/edit/id/<?php echo $user['userid']; ?>">编辑</a>
 						</td>
 					</tr>
 				<?php endforeach; ?>
@@ -33,4 +33,4 @@
 		<?php echo $pageNav;?>
 	</div>
 
-<?php $this->display('layouts/adminfooter.php'); ?>
+<?php $this->display('layouts/footer.php'); ?>

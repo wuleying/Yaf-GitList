@@ -1,6 +1,6 @@
-<?php $this->display('layouts/adminheader.php'); ?>
+<?php $this->display('layouts/header.php'); ?>
 
-	<form name="settingedit" method="post" action="<?php echo ADMINURL;?>/settingedit">
+	<form name="settingedit" method="post" action="<?php echo ADMINURL;?>/setting/edit">
 		<div class="table-box">
 			<table class="table table-striped table-bordered clearfix">
 				<thead>
@@ -30,4 +30,4 @@
 		</div>
 	</form>
 
-<?php $this->display('layouts/adminfooter.php'); ?>
+<?php $this->display('layouts/footer.php'); ?>

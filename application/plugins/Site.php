@@ -18,8 +18,13 @@ class SitePlugin extends Yaf\Plugin_Abstract
 	 */
 	public function routerShutdown(Yaf\Request_Abstract $request, Yaf\Response_Abstract $response)
 	{
+		// 常量
+		define('MODULE_NAME', strtolower($request->getModuleName()));
+		define('CONTROLLER_NAME', strtolower($request->getControllerName()));
+		define('ACTION_NAME', strtolower($request->getActionName()));
+
 		// 检查站点是否已经关闭
-		if ('admin' == strtolower($request->controller))
+		if ('admin' == strtolower(MODULE_NAME))
 		{
 			return;
 		}

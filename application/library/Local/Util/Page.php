@@ -50,6 +50,40 @@ class Page
 	}
 
 	/**
+	 * 显示面包屑导航
+	 *
+	 * @param string $title
+	 * @param array $breadCrumb
+	 * @param boolean $isAdmin
+	 * @return string
+	 *
+	 */
+	public static function showBreadCrumb($title, $breadCrumb = array(), $isAdmin = FALSE)
+	{
+		if ($isAdmin)
+		{
+			$breadCrumbArray[ADMINURL . '/index/index'] = '控制台';
+		}
+		else
+		{
+			$breadCrumbArray[SYSTEMURL] = '首页';
+		}
+		// 面包屑导航
+		if (empty($breadCrumb))
+		{
+			$breadCrumbArray[] = $title;
+		}
+		else
+		{
+			foreach ($breadCrumb as $key => $value)
+			{
+				$breadCrumbArray[$key] = $value;
+			}
+		}
+		return self::breadCrumb($breadCrumbArray);
+	}
+
+	/**
 	 * 分页类
 	 *
 	 * @param integer $currentPage
@@ -127,8 +161,8 @@ class Page
 				$formElement .= "<input type=\"password\" class=\"form-control\" name=\"{$name}\" value=\"{$value}\" />";
 				break;
 			case 2 :
-				$formElement .= "<input type=\"radio\" name=\"{$name}\" value=\"1\" ". ($value ? 'checked' : '') . " /> 是 ";
-				$formElement .= "<input type=\"radio\" name=\"{$name}\" value=\"0\" ". (!$value ? 'checked' : '') . " /> 否 ";
+				$formElement .= "<input type=\"radio\" name=\"{$name}\" value=\"1\" " . ($value ? 'checked' : '') . " /> 是 ";
+				$formElement .= "<input type=\"radio\" name=\"{$name}\" value=\"0\" " . (!$value ? 'checked' : '') . " /> 否 ";
 				break;
 			case 3 :
 				break;

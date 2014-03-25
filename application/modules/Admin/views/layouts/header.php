@@ -24,7 +24,7 @@
 		<ul class="nav navbar-nav navbar-right">
 			<li><p class="navbar-text navbar-right">您好，<a href="#" class="navbar-link"><?php echo $adminInfo['email'];?></a></p></li>
 			<li><a href="<?php echo SYSTEMURL;?>" target="_blank">站点首页</a></li>
-			<li><a href="<?php echo SYSTEMURL;?>/admin/logout">退出</a></li>
+			<li><a href="<?php echo SYSTEMURL;?>/admin/logout/index">退出</a></li>
 		</ul>
 	</div>
 </div>
@@ -32,7 +32,7 @@
 
 <div class="adminmain">
 
-	<?php $this->display('layouts/adminsidebar.php')?>
+	<?php $this->display('layouts/sidebar.php')?>
 
 	<div class="rightbox">
 		<div class="rightmain panel panel-default">
