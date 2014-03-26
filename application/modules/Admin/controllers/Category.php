@@ -107,7 +107,7 @@ class CategoryController extends Local\Controller\Base
 		}
 
 		// @todo 这里还有点问题，父级分类不能设置为子分类的子分类，否则会出现逻辑错误
-		if ($data['categoryid'] == $data['parentid'])
+		if ($data['categoryid'] && ($data['categoryid'] == $data['parentid']))
 		{
 			die('不能成为自身的父分类');
 		}
