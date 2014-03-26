@@ -39,7 +39,7 @@ class ContentController extends Local\Controller\Base
 	{
 		$title = '内容管理';
 		$this->getView()->assign('title', $title);
-		$this->getView()->assign('breadCrumb', Local\Util\Page::showBreadCrumb($title, array(), TRUE));
+		$this->getView()->assign('breadCrumb', Local\Util\Page::dispayBreadCrumb($title, array(), TRUE));
 	}
 
 }

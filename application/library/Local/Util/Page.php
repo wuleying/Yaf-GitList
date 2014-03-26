@@ -58,7 +58,7 @@ class Page
 	 * @return string
 	 *
 	 */
-	public static function showBreadCrumb($title, $breadCrumb = array(), $isAdmin = FALSE)
+	public static function dispayBreadCrumb($title, $breadCrumb = array(), $isAdmin = FALSE)
 	{
 		if ($isAdmin)
 		{
@@ -173,6 +173,37 @@ class Page
 				$formElement .= "<input type=\"text\" class=\"form-control\" name=\"{$name}\" value=\"{$value}\" />";
 		}
 		return $formElement;
+	}
+
+	/**
+	 * 显示分类选择框
+	 *
+	 * @Param array $categoryList
+	 * @param integer $selected
+	 * @param integer $parentid
+	 * @param integer $level
+	 * @return string
+	 *
+	 */
+	public static function displayCategorySelector(& $categoryList, $selected = 0, $parentid = 0, $level = 0)
+	{
+		$html = '';
+		if ($categoryList[$parentid])
+		{
+			foreach ($categoryList[$parentid] as $categoryid => $categoryname)
+			{
+				$prefix = '';
+				if ($level)
+				{
+					$prefix = implode('', array_fill(0, $level, '--'));
+				}
+				$current = ($selected == $categoryid) ? 'selected' : '';
+				$html .= "<option value=\"{$categoryid}\" {$current}>{$prefix}{$categoryname}</option>\n";
+				$html .= self::displayCategorySelector($categoryList, $selected, $categoryid, $level + 1);
+			}
+		}
+
+		return $html;
 	}
 
 }

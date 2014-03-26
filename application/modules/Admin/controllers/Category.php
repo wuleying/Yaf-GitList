@@ -35,48 +35,68 @@ class CategoryController extends Local\Controller\Base
 	/**
 	 * 分类管理首页
 	 *
+	 * @param integer $parentid
+	 *
 	 */
-	public function indexAction()
+	public function indexAction($parentid = 0)
 	{
+		$parentid = (int) $parentid;
+		// 获取分类数据
+		$categories = $this->models['categoryModel']->getCategoryByParentid($parentid);
+		$this->getView()->assign('categories', $categories);
+
 		$title = '分类管理';
+		$this->getView()->assign('parentid', $parentid);
 		$this->getView()->assign('title', $title);
-		$this->getView()->assign('breadCrumb', Local\Util\Page::showBreadCrumb($title, array(), TRUE));
+		$this->getView()->assign('breadCrumb', Local\Util\Page::dispayBreadCrumb($title, array(), TRUE));
 	}
 
 	/**
 	 * 添加/编辑分类
 	 *
 	 * @param integer $id
+	 * @param integer $parentid
 	 *
 	 */
-	public function handleAction($id = 0)
+	public function handleAction($id = 0, $parentid = 0)
 	{
 		$id = (int) $id;
 
 		if ($id)
 		{
+			$categoryInfo = $this->models['categoryModel']->getCategoryById($id);
 			$title = '编辑分类';
 		}
 		else
 		{
+			$categoryInfo = array(
+				'categoryid' => 0,
+				'parentid' => $parentid,
+				'categoryname' => '',
+				'sort' => SORT_DEFAULT_VALUE
+			);
 			$title = '添加分类';
 		}
 
-		$this->getView()->assign('id', $id);
+		// 读取缓存
+		$categoryCache = \Local\Util\Cache::getCache(CACHE_PATH . '/category.json');
+
+		$this->getView()->assign('categoryInfo', $categoryInfo);
+		$this->getView()->assign('categoryList', Local\Util\Page::displayCategorySelector($categoryCache['list'], $categoryInfo['parentid']));
 		$this->getView()->assign('title', $title);
-		$this->getView()->assign('breadCrumb', Local\Util\Page::showBreadCrumb($title, array(), TRUE));
+		$this->getView()->assign('breadCrumb', Local\Util\Page::dispayBreadCrumb($title, array(), TRUE));
+		unset($categoryInfo, $categoryCache);
 	}
 
 	/**
 	 * 执行添加/编辑分类
 	 *
-	 * @param integer $id
 	 * @return boolean
 	 *
 	 */
-	public function doAction($id = 0)
+	public function doAction()
 	{
-		$data['categoryid'] = (int) $id;
+		$data['categoryid'] = (int) $this->getRequest()->getPost('categoryid');
 		$data['categoryname'] = $this->getRequest()->getPost('categoryname');
 		$data['parentid'] = (int) $this->getRequest()->getPost('parentid');
 		$data['sort'] = (int) $this->getRequest()->getPost('sort');
@@ -86,17 +106,61 @@ class CategoryController extends Local\Controller\Base
 			die('请输入分类名称');
 		}
 
-		$this->models['categoryModel']->saveData($data);
-		unset($data);
+		// @todo 这里还有点问题，父级分类不能设置为子分类的子分类，否则会出现逻辑错误
+		if ($data['categoryid'] == $data['parentid'])
+		{
+			die('不能成为自身的父分类');
+		}
 
-		// 写入缓存
-		$category = $this->models['categoryModel']->getAllCategories();
-		Local\Util\Cache::setCache(CACHE_PATH . '/category.json', $category);
-		unset($category);
+		$this->models['categoryModel']->saveData($data);
+
+		// 生成分类缓存
+		$this->_createCategroiesCache();
+		$this->redirect('/admin/category/index/parentid/' . $data['parentid']);
+		return FALSE;
+	}
+
+	/**
+	 * 删除分类
+	 *
+	 * @param integer $id
+	 * @return boolean
+	 *
+	 */
+	public function deleteAction($id = 0)
+	{
+		$id = (int) $id;
+		if ($id)
+		{
+			$this->models['categoryModel']->deleteCategory($id);
+
+			// 生成分类缓存
+			$this->_createCategroiesCache();
+		}
 
 		$this->redirect('/admin/category/index');
-
 		return FALSE;
+	}
+
+	/**
+	 * 生成分类缓存
+	 *
+	 */
+	private function _createCategroiesCache()
+	{
+		// 写入缓存
+		$category['all'] = $this->models['categoryModel']->getAllCategories();
+		$category['list'] = array();
+
+		if (!empty($category['all']))
+		{
+			foreach ($category['all'] as $value)
+			{
+				$category['list'][$value['parentid']][$value['categoryid']] = $value['categoryname'];
+			}
+		}
+		Local\Util\Cache::setCache(CACHE_PATH . '/category.json', $category);
+		unset($category);
 	}
 
 }

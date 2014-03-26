@@ -57,7 +57,7 @@ class UserController extends Local\Controller\Base
 
 		$title = '用户管理';
 		$this->getView()->assign('title', $title);
-		$this->getView()->assign('breadCrumb', Local\Util\Page::showBreadCrumb($title, array(), TRUE));
+		$this->getView()->assign('breadCrumb', Local\Util\Page::dispayBreadCrumb($title, array(), TRUE));
 	}
 
 	/**
@@ -85,7 +85,7 @@ class UserController extends Local\Controller\Base
 		$breadCrumb[ADMINURL . '/user/index'] = '用户管理';
 		$breadCrumb[] = $title;
 		$this->getView()->assign('title', $title);
-		$this->getView()->assign('breadCrumb', Local\Util\Page::showBreadCrumb($title, $breadCrumb, TRUE));
+		$this->getView()->assign('breadCrumb', Local\Util\Page::dispayBreadCrumb($title, $breadCrumb, TRUE));
 	}
 
 	/**

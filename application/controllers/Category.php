@@ -26,9 +26,12 @@ class CategoryController extends Local\Controller\Base
 	/**
 	 * 分类首页
 	 *
+	 * @param integer $id
+	 *
 	 */
-	public function indexAction()
+	public function indexAction($id = 0)
 	{
+		$id = (int) $id;
 		$title = '分类';
 		$this->getView()->assign('title', $title);
 	}

@@ -47,7 +47,7 @@ class UserGroupController extends Local\Controller\Base
 
 		$title = '管理首页';
 		$this->getView()->assign('title', $title);
-		$this->getView()->assign('breadCrumb', Local\Util\Page::showBreadCrumb($title, array(), TRUE));
+		$this->getView()->assign('breadCrumb', Local\Util\Page::dispayBreadCrumb($title, array(), TRUE));
 	}
 
 	/**
@@ -58,7 +58,7 @@ class UserGroupController extends Local\Controller\Base
 	{
 		$title = '编辑用户组';
 		$this->getView()->assign('title', $title);
-		$this->getView()->assign('breadCrumb', Local\Util\Page::showBreadCrumb($title, array(), TRUE));
+		$this->getView()->assign('breadCrumb', Local\Util\Page::dispayBreadCrumb($title, array(), TRUE));
 	}
 
 }
