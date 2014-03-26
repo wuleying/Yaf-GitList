@@ -72,22 +72,11 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
 	 * 自定义路由
 	 *
 	 */
-	public function _initRouter()
+	public function _initRoute(Yaf\Dispatcher $dispatcher)
 	{
-		$router = Yaf\Dispatcher::getInstance()->getRouter();
-		$routes = array(
-			'people' => new Yaf\Route\Regex(
-					'/\/people\/([^\/]+)/i', array(
-				'controller' => 'people',
-				'action' => 'view'), array(
-				1 => 'email')
-			),
-		);
-
-		foreach ($routes as $routekey => $route)
-		{
-			$router->addRoute($routekey, $route);
-		}
+		$router = $dispatcher::getInstance()->getRouter();
+		//\Local\Util\Debug::x(Yaf\Registry::get("config")->routes);
+		$router->addConfig(Yaf\Registry::get("config")->routes);
 	}
 
 	/**

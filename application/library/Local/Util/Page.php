@@ -62,7 +62,7 @@ class Page
 	{
 		if ($isAdmin)
 		{
-			$breadCrumbArray[ADMINURL . '/index/index'] = '控制台';
+			$breadCrumbArray[ADMINURL] = '控制台';
 		}
 		else
 		{

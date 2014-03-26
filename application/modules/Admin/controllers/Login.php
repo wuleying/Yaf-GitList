@@ -22,7 +22,7 @@ class LoginController extends Local\Controller\Base
 		// 管理员已登录
 		if (!empty($this->adminInfo))
 		{
-			$this->redirect('/admin/index/index');
+			$this->redirect('/admin');
 		}
 	}
 
@@ -85,7 +85,7 @@ class LoginController extends Local\Controller\Base
 				Local\Header\Cookies::setCookie('adminemail', $adminInfo['email']);
 				Local\Header\Cookies::setCookie('adminpassword', $adminInfo['password']);
 
-				$this->redirect('/admin/index/index');
+				$this->redirect('/admin');
 			}
 			else
 			{
