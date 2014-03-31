@@ -15,8 +15,7 @@ class IndexController extends Local\Controller\Base
 	 */
 	public function init()
 	{
-		// 控制器名称
-		$this->getView()->assign('controllerName', $this->getRequest()->getControllerName());
+
 	}
 
 	/**

@@ -19,8 +19,6 @@ class ExploreController extends Local\Controller\Base
 		$this->models = array(
 		);
 
-		// 控制器名称
-		$this->getView()->assign('controllerName', $this->getRequest()->getControllerName());
 	}
 
 	/**

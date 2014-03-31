@@ -25,9 +25,9 @@
 	</div>
 	<div class="navbar-collapse collapse">
 		<ul class="nav navbar-nav nav-menu">
-			<li<?php if ('Index' == $controllerName) : ?> class="active"<?php endif; ?>><a href="<?php echo SYSTEMURL;?>">首页</a></li>
-			<li<?php if ('Category' == $controllerName) : ?> class="active"<?php endif; ?>><a href="<?php echo SYSTEMURL;?>/category">分类</a></li>
-			<li<?php if ('Explore' == $controllerName) : ?> class="active"<?php endif; ?>><a href="<?php echo SYSTEMURL;?>/explore">发现</a></li>
+			<li<?php if ('index' == CONTROLLER_NAME) : ?> class="active"<?php endif; ?>><a href="<?php echo SYSTEMURL;?>">首页</a></li>
+			<li<?php if ('category' == CONTROLLER_NAME) : ?> class="active"<?php endif; ?>><a href="<?php echo SYSTEMURL;?>/category">分类</a></li>
+			<li<?php if ('explore' == CONTROLLER_NAME) : ?> class="active"<?php endif; ?>><a href="<?php echo SYSTEMURL;?>/explore">发现</a></li>
 		</ul>
 
 		<form class="navbar-form navbar-left search-from" role="search" method="get" action="<?php echo SYSTEMURL;?>/search">
@@ -36,6 +36,8 @@
 		  </div>
 		  <button type="submit" class="btn btn-default">搜索</button>
 		</form>
+
+		<div class="navbar-left add-git"><a href="<?php echo SYSTEMURL;?>/add" class="btn btn-success">提交GIT</a></div>
 
 		<ul class="nav navbar-nav user-information">
 			<?php if(Yaf\Registry::get('userInfo')) : ?>
