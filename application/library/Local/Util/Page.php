@@ -206,4 +206,43 @@ class Page
 		return $html;
 	}
 
+	/**
+	 * 消息页面
+	 *
+	 * @param string $message
+	 * @param string $url
+	 * @param integer $time
+	 * @param string $template
+	 *
+	 */
+	public static function displayMessage($message, $url = '', $time = 3, $template = 'error/message.php')
+	{
+		$request = new \Yaf\Request\Simple();
+		if(empty($url))
+		{
+			$url = $request->getServer()['HTTP_REFERER'];
+		}
+
+		$view = new \Yaf\View\Simple($request);
+		$view->setScriptPath(\Yaf\Registry::get('config')->application->view->path);
+		$view->assign('message', $message);
+		$view->assign('url', $url);
+		$view->assign('time', $time);
+		$view->display($template);
+		exit();
+	}
+
+	/**
+	 * 错误信息页面
+	 *
+	 * @param type $message
+	 * @param type $url
+	 * @param type $time
+	 *
+	 */
+	public static function displayError($message, $url = '', $time = 3)
+	{
+		self::displayMessage($message, $url, $time, 'error/errormessage.php');
+	}
+
 }

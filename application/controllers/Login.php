@@ -49,24 +49,24 @@ class LoginController extends Local\Controller\Base
 
 		if (empty($email))
 		{
-			die('请填写邮箱');
+			Local\Util\Page::displayError('请填写邮箱');
 		}
 
 		if (empty($password))
 		{
-			die('请输入密码');
+			Local\Util\Page::displayError('请输入密码');
 		}
 
 		if (!filter_var($email, FILTER_VALIDATE_EMAIL))
 		{
-			die('邮箱格式不正确');
+			Local\Util\Page::displayError('邮箱格式不正确');
 		}
 
 		$userInfo = $this->models['userModel']->getUserByEmail($email);
 
 		if (empty($userInfo))
 		{
-			die('用户不存在');
+			Local\Util\Page::displayError('用户不存在');
 		}
 
 		// 检查密码
@@ -83,7 +83,7 @@ class LoginController extends Local\Controller\Base
 		}
 		else
 		{
-			die('密码不正确');
+			Local\Util\Page::displayError('密码不正确');
 		}
 
 		return FALSE;
