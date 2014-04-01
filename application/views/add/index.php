@@ -8,17 +8,25 @@
 		  <input type="input" class="form-control" id="git-title" name="title" value="" />
 		</div>
 	  </div>
+
 	  <div class="form-group">
-		<label for="git-url" class="col-sm-2 control-label">项目URL</label>
+		<label for="git-tags" class="col-sm-2 control-label">分类</label>
 		<div class="col-sm-10">
-		  <input type="input" class="form-control" id="git-url" name="url" value="" />
+		  <select class="form-control" name="categoryid">
+				<option value="0">请选择</option>
+				<?php if($category) : ?>
+					<?php foreach($category['all'] as $value) : ?>
+						<option value="<?php echo $value['categoryid']; ?>"><?php echo $value['categoryname']; ?></option>
+					<?php endforeach; ?>
+				<?php endif; ?>
+		  </select>
 		</div>
 	  </div>
 
 	  <div class="form-group">
-		<label for="git-tags" class="col-sm-2 control-label">标签</label>
+		<label for="git-url" class="col-sm-2 control-label">项目URL</label>
 		<div class="col-sm-10">
-		  <input type="input" class="form-control" id="git-tags" name="tag" value="" />
+		  <input type="input" class="form-control" id="git-url" name="url" value="" />
 		</div>
 	  </div>
 

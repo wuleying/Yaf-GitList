@@ -83,7 +83,7 @@ class LoginController extends Local\Controller\Base
 		}
 		else
 		{
-			Local\Util\Page::displayError('密码不正确');
+			Local\Util\Page::displayError('邮箱或密码不正确');
 		}
 
 		return FALSE;

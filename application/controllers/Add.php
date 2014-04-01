@@ -29,6 +29,7 @@ class AddController extends Local\Controller\Base
 	{
 		$title = '提交GIT';
 		$this->getView()->assign('title', $title);
+		$this->getView()->assign('category', Local\Util\Cache::getCache(CACHE_PATH . '/category.json'));
 	}
 
 	/**
@@ -38,31 +39,38 @@ class AddController extends Local\Controller\Base
 	public function doAction()
 	{
 		$data['title'] = $this->getRequest()->getPost('title');
+		$data['categoryid'] = (int) $this->getRequest()->getPost('categoryid');
 		$data['url'] = $this->getRequest()->getPost('url');
 		$data['memo'] = $this->getRequest()->getPost('memo');
 		$data['userid'] = Yaf\Registry::get('userInfo')['userid'];
 		$data['dateline'] = TIMENOW;
 
-		if(empty($data['title']))
+		if (empty($data['title']))
 		{
-			die('项目名称不能为空');
+			Local\Util\Page::displayError('项目名称不能为空');
 		}
 
-		if(empty($data['url']))
+		if (empty($data['categoryid']))
 		{
-			die('项目URL不能为空');
+			Local\Util\Page::displayError('请选择分类');
 		}
 
-		if(empty($data['memo']))
+		if (empty($data['url']))
 		{
-			die('项目备注不能为空');
+			Local\Util\Page::displayError('项目URL不能为空');
+		}
+
+		if (empty($data['memo']))
+		{
+			Local\Util\Page::displayError('项目备注不能为空');
 		}
 
 
 		$this->models['gitModel']->saveData($data);
 		unset($data);
 
-		$this->redirect('/add');
+		//$this->redirect('/add');
+		Local\Util\Page::displayMessage('提交成功，管理员审核通过后显示，请耐心等待。', '/add');
 
 		return FALSE;
 	}
