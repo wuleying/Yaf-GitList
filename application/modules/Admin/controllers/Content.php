@@ -13,7 +13,8 @@ class ContentController extends Local\Controller\Base
 	{
 		// 加载模型
 		$this->models = array(
-			'userModel' => new UserModel()
+			'userModel' => new UserModel(),
+			'gitModel' => new GitModel()
 		);
 
 		// 获取管理员信息
@@ -37,6 +38,9 @@ class ContentController extends Local\Controller\Base
 	 */
 	public function indexAction()
 	{
+		$gits = $this->models['gitModel']->getAllGit();
+		$this->getView()->assign('gits', $gits);
+
 		$title = '内容管理';
 		$this->getView()->assign('title', $title);
 		$this->getView()->assign('breadCrumb', Local\Util\Page::dispayBreadCrumb($title, array(), TRUE));

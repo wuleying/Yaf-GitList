@@ -78,7 +78,7 @@ class Base
 		{
 			$data[] = $row;
 		}
-		unset($query, $result, $row);
+		unset($result, $row);
 		return $data;
 	}
 
@@ -124,7 +124,7 @@ class Base
 	 * 保存/更新数据
 	 *
 	 * @param array $data
-	 * @return integer
+	 * @return
 	 *
 	 */
 	public function saveData($data)
@@ -159,6 +159,8 @@ class Base
 				WHERE {$this->table}id = {$id}
 			", $db::QUERY_MODE_EXECUTE);
 		}
+
+		return $query;
 	}
 
 }

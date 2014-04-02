@@ -69,7 +69,6 @@ class AddController extends Local\Controller\Base
 		$this->models['gitModel']->saveData($data);
 		unset($data);
 
-		//$this->redirect('/add');
 		Local\Util\Page::displayMessage('提交成功，管理员审核通过后显示，请耐心等待。', '/add');
 
 		return FALSE;
