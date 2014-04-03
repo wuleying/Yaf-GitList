@@ -19,8 +19,8 @@
 						<td><a href=""><?php echo $git['userid'];?></a></td>
 						<td><?php echo Local\Util\Time::formatDate($git['dateline']);?></td>
 						<td>
-							<a href="<?php echo ADMINURL?>/content/edit/id/<?php echo $git['gitid']; ?>" class="btn btn-success">编辑</a>
-							<a href="<?php echo ADMINURL?>/content/delete/id/<?php echo $git['gitid']; ?>" class="btn btn-danger">删除</a>
+							<a href="<?php echo ADMINURL?>/review/do/id/<?php echo $git['gitid']; ?>/approved/<?php echo CONTENT_APPROVED;?>" class="btn btn-success">通过</a>
+							<a href="<?php echo ADMINURL?>/review/do/id/<?php echo $git['gitid']; ?>/approved/<?php echo CONTENT_UNAUDITED;?>" class="btn btn-danger">拒绝</a>
 						</td>
 					</tr>
 				<?php endforeach; ?>

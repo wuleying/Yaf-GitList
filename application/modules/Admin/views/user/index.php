@@ -9,7 +9,7 @@
 					<th width="20%">用户组</th>
 					<th width="15%">注册时间</th>
 					<th width="15%">最后登录时间</th>
-					<th width="8%">操作</th>
+					<th width="70">操作</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -21,7 +21,7 @@
 						<td><?php echo Local\Util\Time::formatDate($user['registrattime']);?></td>
 						<td><?php echo Local\Util\Time::formatDate($user['lasttime']);?></td>
 						<td>
-							<a href="<?php echo ADMINURL?>/user/edit/id/<?php echo $user['userid']; ?>">编辑</a>
+							<a href="<?php echo ADMINURL?>/user/edit/id/<?php echo $user['userid']; ?>" class="btn btn-success">编辑</a>
 						</td>
 					</tr>
 				<?php endforeach; ?>

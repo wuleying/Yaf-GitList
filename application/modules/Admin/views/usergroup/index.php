@@ -6,7 +6,7 @@
 				<tr>
 					<th width="15%">ID</th>
 					<th>用户组</th>
-					<th>操作</th>
+					<th width="70">操作</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -15,7 +15,7 @@
 						<td><?php echo $userGroup['usergroupid'];?></td>
 						<td><?php echo $userGroup['groupname'];?></td>
 						<td>
-							<a href="<?php echo ADMINURL?>/usergroup/edit/id/<?php echo $userGroup['usergroupid']; ?>">编辑</a>
+							<a href="<?php echo ADMINURL?>/usergroup/edit/id/<?php echo $userGroup['usergroupid']; ?>" class="btn btn-success">编辑</a>
 						</td>
 					</tr>
 				<?php endforeach; ?>

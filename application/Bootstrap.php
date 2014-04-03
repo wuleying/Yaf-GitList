@@ -53,6 +53,7 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
 
 		// 默认分页数
 		define('PERPAGE', $this->_config->pages->perpage);
+		//define('PERPAGE', 2);
 
 		// 用户密码长度限制
 		define('USER_PASSWORD_MIN', $this->_config->users->default->minpassword);
@@ -60,6 +61,11 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
 
 		// 排序的默认值
 		define('SORT_DEFAULT_VALUE', 99);
+
+		// 内容审核状态
+		define('CONTENT_UNAPPROVED', 0);
+		define('CONTENT_APPROVED', 1);
+		define('CONTENT_UNAUDITED', 2);
 
 		// 用户组ID
 		foreach ($this->_config->users->groupid as $groupName => $groupid)

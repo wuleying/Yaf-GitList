@@ -1,12 +1,12 @@
 <?php
 
 /**
- * 内容管理控制器
+ * 内容审核控制器
  *
  * @author $Author: 5590548@qq.com $
  *
  */
-class ContentController extends Local\Controller\Base
+class ReviewController extends Local\Controller\Base
 {
 
 	public function init()
@@ -41,28 +41,30 @@ class ContentController extends Local\Controller\Base
 		$page = $this->getRequest()->getParam('page');
 		$page = max(1, $page);
 
-		$gitCount = $this->models['gitModel']->getAllGitCount();
+		$gitCount = $this->models['gitModel']->getAllGitCount(CONTENT_UNAPPROVED);
 		// 查询偏移量
 		$offset = ($page - 1) * PERPAGE;
 		// 总页数
 		$pageTotal = ceil($gitCount / PERPAGE);
 
-		$gits = $this->models['gitModel']->getAllGit(CONTENT_APPROVED, 'dateline DESC', $offset, PERPAGE);
+		$gits = $this->models['gitModel']->getAllGit(CONTENT_UNAPPROVED, 'dateline DESC', $offset, PERPAGE);
 		$this->getView()->assign('gits', $gits);
-		$this->getView()->assign('pageNav', Local\Util\Page::pageNav($page, $pageTotal, ADMINURL . '/content/index'));
+		$this->getView()->assign('pageNav', Local\Util\Page::pageNav($page, $pageTotal, ADMINURL . '/review/index'));
 
-		$title = '内容管理';
+		$title = '审核内容';
 		$this->getView()->assign('title', $title);
 		$this->getView()->assign('breadCrumb', Local\Util\Page::dispayBreadCrumb($title, array(), TRUE));
 	}
 
 	/**
-	 * 编辑内容
+	 * 审核内容
 	 *
 	 * @param integer $id
+	 * @param integer $approved
+	 * @return boolean
 	 *
 	 */
-	public function editAction($id = 0)
+	public function doAction($id = 0, $approved = CONTENT_UNAPPROVED)
 	{
 		$id = (int) $id;
 		if (empty($id))
@@ -70,11 +72,11 @@ class ContentController extends Local\Controller\Base
 			Local\Util\Page::displayError('参数不正确');
 		}
 
-		$title = '编辑内容';
-		$breadCrumb[ADMINURL . '/content/index'] = '内容管理';
-		$breadCrumb[] = $title;
-		$this->getView()->assign('title', $title);
-		$this->getView()->assign('breadCrumb', Local\Util\Page::dispayBreadCrumb($title, $breadCrumb, TRUE));
+		$this->models['gitModel']->reviewGit($id, $approved);
+
+		$this->redirect('/admin/review/index');
+
+		return FALSE;
 	}
 
 }

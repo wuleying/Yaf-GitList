@@ -26,7 +26,7 @@
 			</tbody>
 			<tfoot>
 				<tr>
-					<td colspan="2"><input type="submit" class="btn btn-success" value="确定" /></td>
+					<td colspan="2"><input type="submit" class="btn btn-primary" value="确定" /></td>
 				</tr>
 			</tfoot>
 		</table>
