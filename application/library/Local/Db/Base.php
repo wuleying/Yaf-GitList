@@ -11,7 +11,8 @@ namespace Local\Db;
 
 class Base
 {
-
+	// 数据库连接
+	protected $db;
 	// 主数据库
 	protected $dbMaster;
 	// 从数据库
@@ -34,6 +35,9 @@ class Base
 		$this->dbSlave = new \Zend\Db\Adapter\Adapter(
 				\Yaf\Registry::get('config')->database->slave->toArray()
 		);
+
+		// 默认使用从数据库
+		$this->db = & $this->dbSlave;
 	}
 
 	/**
@@ -44,7 +48,7 @@ class Base
 	 */
 	protected function q($str)
 	{
-		return $this->dbSlave->platform->quoteIdentifier($str);
+		return $this->db->platform->quoteIdentifier($str);
 	}
 
 	/**
@@ -55,7 +59,7 @@ class Base
 	 */
 	protected function e($str)
 	{
-		return $this->dbSlave->platform->quoteValue(htmlspecialchars($str));
+		return $this->db->platform->quoteValue(htmlspecialchars($str));
 	}
 
 	/**
@@ -67,7 +71,7 @@ class Base
 	 */
 	protected function queryResult($sql)
 	{
-		$query = $this->dbSlave->query($sql);
+		$query = $this->db->query($sql);
 		$result = $query->execute();
 		return $result;
 	}
@@ -126,7 +130,8 @@ class Base
 	 */
 	public function queryWrite($sql)
 	{
-		$query = $this->dbMaster->query($sql);
+		$this->db = & $this->dbMaster;
+		$query = $this->db->query($sql);
 		$query->execute();
 	}
 
@@ -144,7 +149,9 @@ class Base
 			return;
 		}
 
-		$db = & $this->dbMaster;
+		$this->db = & $this->dbMaster;
+		
+		$db = & $this->db;
 		$sql = array();
 		$id = 0;
 		if (isset($data[$this->table . 'id']))

@@ -80,9 +80,7 @@ class RegisterController extends Local\Controller\Base
 
 		// 写入数据
 		$this->models['userModel']->newUser($email, $password);
-		Local\Util\Page::displayMessage('注册成功');
-
-		$this->redirect('/login');
+		Local\Util\Page::displayMessage('注册成功', '/login');
 	}
 
 }

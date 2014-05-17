@@ -105,19 +105,6 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
 	}
 
 	/**
-	 * 连接数据库，设置数据库适配器
-	 *
-	 */
-	/**public function _initDefaultDbAdapter()
-	{
-		$db = new Zend\Db\Adapter\Adapter(
-				$this->_config->database->master->toArray()
-		);
-
-		Yaf\Registry::set('db', $db);
-	}**/
-
-	/**
 	 * 初始化系统设置
 	 *
 	 */
