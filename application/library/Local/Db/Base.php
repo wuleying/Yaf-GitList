@@ -164,6 +164,8 @@ class Base
 				INSERT INTO " . $this->q($this->table) . " SET
 				" . implode(',', $sql) . "
 			", $db::QUERY_MODE_EXECUTE);
+
+			$id =  $db->getDriver()->getLastGeneratedValue();
 		}
 		else
 		{
@@ -174,7 +176,7 @@ class Base
 			", $db::QUERY_MODE_EXECUTE);
 		}
 
-		return $query;
+		return $id;
 	}
 
 }
