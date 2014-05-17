@@ -6,9 +6,6 @@
  * @author $Author: 5590548@qq.com $
  *
  */
-// 设置错误报告级别
-error_reporting(E_ALL ^ E_NOTICE);
-
 // 当前时间
 define('TIMENOW', $_SERVER['REQUEST_TIME']);
 // 目录分隔符

@@ -12,8 +12,10 @@ namespace Local\Db;
 class Base
 {
 
-	// 数据库对象
-	protected $db;
+	// 主数据库
+	protected $dbMaster;
+	// 从数据库
+	protected $dbSlave;
 	// 表名
 	protected $table;
 
@@ -23,7 +25,15 @@ class Base
 	 */
 	public function __construct()
 	{
-		$this->db = \Yaf\Registry::get('db');
+		// 主数据库
+		$this->dbMaster = new \Zend\Db\Adapter\Adapter(
+				\Yaf\Registry::get('config')->database->master->toArray()
+		);
+
+		// 从数据库
+		$this->dbSlave = new \Zend\Db\Adapter\Adapter(
+				\Yaf\Registry::get('config')->database->slave->toArray()
+		);
 	}
 
 	/**
@@ -34,7 +44,7 @@ class Base
 	 */
 	protected function q($str)
 	{
-		return $this->db->platform->quoteIdentifier($str);
+		return $this->dbSlave->platform->quoteIdentifier($str);
 	}
 
 	/**
@@ -45,7 +55,7 @@ class Base
 	 */
 	protected function e($str)
 	{
-		return $this->db->platform->quoteValue(htmlspecialchars($str));
+		return $this->dbSlave->platform->quoteValue(htmlspecialchars($str));
 	}
 
 	/**
@@ -57,7 +67,7 @@ class Base
 	 */
 	protected function queryResult($sql)
 	{
-		$query = $this->db->query($sql);
+		$query = $this->dbSlave->query($sql);
 		$result = $query->execute();
 		return $result;
 	}
@@ -116,7 +126,7 @@ class Base
 	 */
 	public function queryWrite($sql)
 	{
-		$query = $this->db->query($sql);
+		$query = $this->dbMaster->query($sql);
 		$query->execute();
 	}
 
@@ -134,10 +144,14 @@ class Base
 			return;
 		}
 
-		$db = & $this->db;
+		$db = & $this->dbMaster;
 		$sql = array();
-		$id = $data[$this->table . 'id'];
-		unset($data[$this->table . 'id']);
+		$id = 0;
+		if (isset($data[$this->table . 'id']))
+		{
+			$id = $data[$this->table . 'id'];
+			unset($data[$this->table . 'id']);
+		}
 
 		foreach ($data as $key => $value)
 		{

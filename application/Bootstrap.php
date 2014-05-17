@@ -22,6 +22,25 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
 	}
 
 	/**
+	 * 初始化错误报告
+	 *
+	 */
+	public function _initDisplayErrors()
+	{
+
+		if ($this->_config->application->display->error)
+		{
+			error_reporting(-1);
+			ini_set('display_errors', 1);
+		}
+		else
+		{
+			error_reporting(0);
+			ini_set('display_errors', 0);
+		}
+	}
+
+	/**
 	 * 初始化命名空间，以 Zend, Local 开头的类为本地类
 	 *
 	 */
@@ -53,7 +72,6 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
 
 		// 默认分页数
 		define('PERPAGE', $this->_config->pages->perpage);
-		//define('PERPAGE', 2);
 
 		// 用户密码长度限制
 		define('USER_PASSWORD_MIN', $this->_config->users->default->minpassword);
@@ -81,22 +99,23 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
 	public function _initRoute(Yaf\Dispatcher $dispatcher)
 	{
 		$router = $dispatcher::getInstance()->getRouter();
-		//\Local\Util\Debug::x(Yaf\Registry::get("config")->routes);
-		$router->addConfig(Yaf\Registry::get("config")->routes);
+		$routes = new Yaf\Config\Ini(APP_PATH . DS . 'conf' . DS . 'routes.ini', 'routes');
+		$router->addConfig($routes->routes);
+		unset($routes);
 	}
 
 	/**
 	 * 连接数据库，设置数据库适配器
 	 *
 	 */
-	public function _initDefaultDbAdapter()
+	/**public function _initDefaultDbAdapter()
 	{
 		$db = new Zend\Db\Adapter\Adapter(
-				$this->_config->database->params->toArray()
+				$this->_config->database->master->toArray()
 		);
 
 		Yaf\Registry::set('db', $db);
-	}
+	}**/
 
 	/**
 	 * 初始化系统设置
