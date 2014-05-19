@@ -65,10 +65,13 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
 		define('ADMINURL', SYSTEMURL . '/admin');
 
 		// 缓存文件保存路径
-		define('CACHE_PATH', $this->_config->cache->path);
+		define('CACHE_PATH', $this->_config->filecache->path);
 
 		// Cookies 超时时间
 		define('COOKIE_TIMEOUT', (TIMENOW + $this->_config->cookies->timeout));
+
+		// Memcache 默认超时时间
+		define('MEMCACHE_TIMEOUT', $this->_config->memcache->timeout);
 
 		// 默认分页数
 		define('PERPAGE', $this->_config->pages->perpage);
@@ -105,12 +108,23 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
 	}
 
 	/**
+	 * 初始化 Memcache
+	 *
+	 */
+	public function _initMemcache()
+	{
+		$memcache = new \Local\Cache\MemcacheSimple($this->_config->memcache->toArray());
+		Yaf\Registry::set('memcache', $memcache);
+		unset($memcache);
+	}
+
+	/**
 	 * 初始化系统设置
 	 *
 	 */
 	public function _initSetttings()
 	{
-		$settings = Local\Util\Cache::getCache(CACHE_PATH . DS . 'setting.json');
+		$settings = Local\Cache\FileCache::getCache(CACHE_PATH . DS . 'setting.json');
 		$setting = array();
 		if (!empty($settings))
 		{

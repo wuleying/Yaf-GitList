@@ -75,7 +75,7 @@ class SettingController extends Local\Controller\Base
 
 		// 更新缓存
 		$setting = $this->models['settingModel']->getAllSetting();
-		Local\Util\Cache::setCache(CACHE_PATH . '/setting.json', $setting);
+		Local\Cache\FileCache::setCache(CACHE_PATH . '/setting.json', $setting);
 
 		$this->redirect('/admin/setting/index');
 		return FALSE;

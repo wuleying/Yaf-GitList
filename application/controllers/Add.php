@@ -29,7 +29,7 @@ class AddController extends Local\Controller\Base
 	{
 		$title = '提交GIT';
 		$this->getView()->assign('title', $title);
-		$this->getView()->assign('category', Local\Util\Cache::getCache(CACHE_PATH . '/category.json'));
+		$this->getView()->assign('category', Local\Cache\FileCache::getCache(CACHE_PATH . '/category.json'));
 	}
 
 	/**

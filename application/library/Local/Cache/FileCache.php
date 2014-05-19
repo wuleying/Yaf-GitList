@@ -7,9 +7,9 @@
  *
  */
 
-namespace Local\Util;
+namespace Local\Cache;
 
-class Cache
+class FileCache
 {
 
 	/**
