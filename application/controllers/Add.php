@@ -29,7 +29,7 @@ class AddController extends Local\Controller\Base
 	{
 		$title = '提交GIT';
 		$this->getView()->assign('title', $title);
-		$this->getView()->assign('category', Local\Cache\FileCache::getCache(CACHE_PATH . '/category.json'));
+		$this->getView()->assign('category', Yaf\Registry::get('memcache')->get('category'));
 	}
 
 	/**
@@ -64,7 +64,6 @@ class AddController extends Local\Controller\Base
 		{
 			Local\Util\Page::displayError('项目备注不能为空');
 		}
-
 
 		$this->models['gitModel']->saveData($data);
 		unset($data);

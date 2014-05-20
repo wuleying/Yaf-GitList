@@ -60,11 +60,11 @@ class MemcacheSimple
 	 * @param string $key
 	 * @param string $value
 	 * @param integer $expire
-	 * @param boolean $longConnect
+	 * @param boolean $flag
 	 *
 	 */
-	public function set($key, $value, $expire = MEMCACHE_TIMEOUT, $longConnect = 0)
+	public function set($key, $value, $expire = MEMCACHE_TIMEOUT, $flag = MEMCACHE_COMPRESSED)
 	{
-		$this->_memcache->set($key, $value, $longConnect, $expire);
+		$this->_memcache->set($key, $value, $flag, $expire);
 	}
 }

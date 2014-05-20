@@ -79,7 +79,7 @@ class CategoryController extends Local\Controller\Base
 		}
 
 		// 读取缓存
-		$categoryCache = \Local\Cache\FileCache::getCache(CACHE_PATH . '/category.json');
+		$categoryCache = Yaf\Registry::get('memcache')->get('category');
 
 		$this->getView()->assign('categoryInfo', $categoryInfo);
 		$this->getView()->assign('categoryList', Local\Util\Page::displayCategorySelector($categoryCache['list'], $categoryInfo['parentid']));
@@ -159,7 +159,7 @@ class CategoryController extends Local\Controller\Base
 				$category['list'][$value['parentid']][$value['categoryid']] = $value['categoryname'];
 			}
 		}
-		Local\Cache\FileCache::setCache(CACHE_PATH . '/category.json', $category);
+		Yaf\Registry::get('memcache')->set('category', $category, MEMCACHE_NEVER_TIMEOUT);
 		unset($category);
 	}
 

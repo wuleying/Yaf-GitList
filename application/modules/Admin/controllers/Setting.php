@@ -75,7 +75,7 @@ class SettingController extends Local\Controller\Base
 
 		// 更新缓存
 		$setting = $this->models['settingModel']->getAllSetting();
-		Local\Cache\FileCache::setCache(CACHE_PATH . '/setting.json', $setting);
+		Yaf\Registry::get('memcache')->set('setting', $setting, MEMCACHE_NEVER_TIMEOUT);
 
 		$this->redirect('/admin/setting/index');
 		return FALSE;

@@ -188,7 +188,7 @@ class Page
 	public static function displayCategorySelector(& $categoryList, $selected = 0, $parentid = 0, $level = 0)
 	{
 		$html = '';
-		if ($categoryList[$parentid])
+		if (isset($categoryList[$parentid]))
 		{
 			foreach ($categoryList[$parentid] as $categoryid => $categoryname)
 			{

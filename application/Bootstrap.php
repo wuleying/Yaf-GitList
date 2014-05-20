@@ -72,6 +72,8 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
 
 		// Memcache 默认超时时间
 		define('MEMCACHE_TIMEOUT', $this->_config->memcache->timeout);
+		// Memcache 永不超时
+		define('MEMCACHE_NEVER_TIMEOUT', 0);
 
 		// 默认分页数
 		define('PERPAGE', $this->_config->pages->perpage);
@@ -124,7 +126,7 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
 	 */
 	public function _initSetttings()
 	{
-		$settings = Local\Cache\FileCache::getCache(CACHE_PATH . DS . 'setting.json');
+		$settings = Yaf\Registry::get('memcache')->get('setting');
 		$setting = array();
 		if (!empty($settings))
 		{

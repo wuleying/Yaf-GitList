@@ -43,7 +43,7 @@ class UserGroupController extends Local\Controller\Base
 		$this->getView()->assign('userGroups', $userGroups);
 
 		// 写入缓存 @todo 要移动到编辑用户组ACTION
-		Local\Cache\FileCache::setCache(CACHE_PATH . '/usergroup.json', $userGroups);
+		Yaf\Registry::get('memcache')->set('usergroup', $userGroups, MEMCACHE_NEVER_TIMEOUT);
 
 		$title = '管理首页';
 		$this->getView()->assign('title', $title);
