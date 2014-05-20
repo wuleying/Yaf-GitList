@@ -53,7 +53,7 @@ class UserController extends Local\Controller\Base
 		$this->getView()->assign('users', $users);
 		$this->getView()->assign('pageNav', Local\Util\Page::pageNav($page, $pageTotal, ADMINURL . '/user'));
 		// 获取用户组缓存
-		$this->getView()->assign('userGroups', Local\Cache\FileCache::getCache(CACHE_PATH . '/usergroup.json'));
+		$this->getView()->assign('userGroups', Yaf\Registry::get('memcache')->get('usergroup'));
 
 		$title = '用户管理';
 		$this->getView()->assign('title', $title);
@@ -79,7 +79,7 @@ class UserController extends Local\Controller\Base
 
 		$this->getView()->assign('userInfo', $userInfo);
 		// 获取用户组缓存
-		$this->getView()->assign('userGroups', Local\Cache\FileCache::getCache(CACHE_PATH . '/usergroup.json'));
+		$this->getView()->assign('userGroups', Yaf\Registry::get('memcache')->get('usergroup'));
 
 		$title = '编辑用户';
 		$breadCrumb[ADMINURL . '/user/index'] = '用户管理';

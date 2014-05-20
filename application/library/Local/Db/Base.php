@@ -149,9 +149,7 @@ class Base
 			return;
 		}
 
-		$this->db = & $this->dbMaster;
-		
-		$db = & $this->db;
+		$db = & $this->dbMaster;
 		$sql = array();
 		$id = 0;
 		if (isset($data[$this->table . 'id']))
