@@ -55,7 +55,6 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
 	/**
 	 * 注册常量
 	 *
-	 *
 	 */
 	public function _initConstant()
 	{

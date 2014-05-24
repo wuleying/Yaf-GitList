@@ -38,8 +38,7 @@ class ContentController extends Local\Controller\Base
 	 */
 	public function indexAction()
 	{
-		$page = $this->getRequest()->getParam('page');
-		$page = max(1, $page);
+		$page = max(1, $this->getRequest()->getParam('page'));
 
 		$gitCount = $this->models['gitModel']->getAllGitCount();
 		// 查询偏移量
