@@ -18,6 +18,7 @@ class AddController extends Local\Controller\Base
 		// 加载模型
 		$this->models = array(
 			'gitModel' => new GitModel(),
+			'categoryModel' => new CategoryModel()
 		);
 	}
 
@@ -29,7 +30,7 @@ class AddController extends Local\Controller\Base
 	{
 		$title = '提交GIT';
 		$this->getView()->assign('title', $title);
-		$this->getView()->assign('category', Yaf\Registry::get('memcache')->get('category'));
+		$this->getView()->assign('category', $this->models['categoryModel']->getAllCategoriesByCache());
 	}
 
 	/**

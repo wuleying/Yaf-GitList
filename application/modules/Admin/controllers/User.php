@@ -13,7 +13,8 @@ class UserController extends Local\Controller\Base
 	{
 		// 加载模型
 		$this->models = array(
-			'userModel' => new UserModel()
+			'userModel' => new UserModel(),
+			'userGroupModel' => new UserGroupModel()
 		);
 
 		// 获取管理员信息
@@ -52,8 +53,9 @@ class UserController extends Local\Controller\Base
 
 		$this->getView()->assign('users', $users);
 		$this->getView()->assign('pageNav', Local\Util\Page::pageNav($page, $pageTotal, ADMINURL . '/user'));
+
 		// 获取用户组缓存
-		$this->getView()->assign('userGroups', Yaf\Registry::get('memcache')->get('usergroup'));
+		$this->getView()->assign('userGroups', $this->models['userGroupModel']->getAllUserGroupsByCache());
 
 		$title = '用户管理';
 		$this->getView()->assign('title', $title);
@@ -79,7 +81,7 @@ class UserController extends Local\Controller\Base
 
 		$this->getView()->assign('userInfo', $userInfo);
 		// 获取用户组缓存
-		$this->getView()->assign('userGroups', Yaf\Registry::get('memcache')->get('usergroup'));
+		$this->getView()->assign('userGroups', $this->models['userGroupModel']->getAllUserGroupsByCache());
 
 		$title = '编辑用户';
 		$breadCrumb[ADMINURL . '/user/index'] = '用户管理';
@@ -97,7 +99,7 @@ class UserController extends Local\Controller\Base
 		$data['userid'] = $this->getRequest()->getPost('userid');
 		$data['usergroupid'] = $this->getRequest()->getPost('usergroupid');
 		$password = $this->getRequest()->getPost('password');
-		$repassword = $this->getRequest()->getPost('repassword');
+		//$repassword = $this->getRequest()->getPost('repassword');
 
 		if (empty($data['userid']))
 		{

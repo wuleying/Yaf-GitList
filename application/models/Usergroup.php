@@ -26,7 +26,7 @@ class UserGroupModel extends Local\Db\Base
 			FROM " . $this->q($this->table) . "
 		");
 
-		if(!empty($query))
+		if (!empty($query))
 		{
 			foreach ($query as $value)
 			{
@@ -34,6 +34,24 @@ class UserGroupModel extends Local\Db\Base
 			}
 		}
 		return $userGroups;
+	}
+
+	/**
+	 * 从 Memcache 中获取缓存数据
+	 *
+	 * @return array
+	 * 
+	 */
+	public function getAllUserGroupsByCache()
+	{
+		$usergroup = Yaf\Registry::get('memcache')->get('usergroup');
+		if (empty($usergroup))
+		{
+			Yaf\Registry::get('memcache')->set('usergroup', $this->getAllUserGroups(), MEMCACHE_NEVER_TIMEOUT);
+			$usergroup = Yaf\Registry::get('memcache')->get('usergroup');
+		}
+
+		return $usergroup;
 	}
 
 }

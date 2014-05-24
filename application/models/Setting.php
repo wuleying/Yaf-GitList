@@ -27,4 +27,32 @@ class SettingModel extends Local\Db\Base
 		");
 	}
 
+	/**
+	 * 从 Memcache 中获取系统设置数据
+	 *
+	 * @return array
+	 *
+	 */
+	public function getAllSettingByCache()
+	{
+		$settings = Yaf\Registry::get('memcache')->get('setting');
+		if (empty($settings))
+		{
+			Yaf\Registry::get('memcache')->set('setting', $this->getAllSetting(), MEMCACHE_NEVER_TIMEOUT);
+			$settings = Yaf\Registry::get('memcache')->get('setting');
+		}
+
+		$setting = array();
+		if (!empty($settings))
+		{
+			foreach ($settings as $value)
+			{
+				$setting[$value['title']] = $value['value'];
+			}
+		}
+
+		unset($settings);
+		return $setting;
+	}
+
 }

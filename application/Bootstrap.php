@@ -126,18 +126,10 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
 	 */
 	public function _initSetttings()
 	{
-		$settings = Yaf\Registry::get('memcache')->get('setting');
-		$setting = array();
-		if (!empty($settings))
-		{
-			foreach ($settings as $value)
-			{
-				$setting[$value['title']] = $value['value'];
-			}
-		}
-
+		$settingModel = new SettingModel();
+		$setting = $settingModel->getAllSettingByCache();
 		Yaf\Registry::set('setting', $setting);
-		unset($settings, $setting);
+		unset($setting);
 	}
 
 	/**

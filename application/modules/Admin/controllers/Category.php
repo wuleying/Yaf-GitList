@@ -79,7 +79,7 @@ class CategoryController extends Local\Controller\Base
 		}
 
 		// 读取缓存
-		$categoryCache = Yaf\Registry::get('memcache')->get('category');
+		$categoryCache =  $this->models['categoryModel']->getAllCategoriesByCache();
 
 		$this->getView()->assign('categoryInfo', $categoryInfo);
 		$this->getView()->assign('categoryList', Local\Util\Page::displayCategorySelector($categoryCache['list'], $categoryInfo['parentid']));
