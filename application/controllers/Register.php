@@ -33,7 +33,7 @@ class RegisterController extends Local\Controller\Base
 	 */
 	public function indexAction()
 	{
-		$title = '新用户注册';
+		$title = Yaf\Registry::get('lang')->translate('New user register');
 		$this->getView()->assign('title', $title);
 	}
 

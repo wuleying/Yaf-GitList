@@ -29,7 +29,7 @@ class CategoryController extends Local\Controller\Base
 	public function indexAction($id = 0)
 	{
 		$id = (int) $id;
-		$title = '分类';
+		$title = Yaf\Registry::get('lang')->translate('Category');
 		$this->getView()->assign('title', $title);
 	}
 

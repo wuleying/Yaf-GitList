@@ -28,7 +28,7 @@ class AddController extends Local\Controller\Base
 	 */
 	public function indexAction()
 	{
-		$title = '提交GIT';
+		$title = Yaf\Registry::get('lang')->translate('Submit GIT');
 		$this->getView()->assign('title', $title);
 		$this->getView()->assign('category', $this->models['categoryModel']->getAllCategoriesByCache());
 	}
@@ -48,28 +48,28 @@ class AddController extends Local\Controller\Base
 
 		if (empty($data['title']))
 		{
-			Local\Util\Page::displayError('项目名称不能为空');
+			Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('Project name cannot be empty'));
 		}
 
 		if (empty($data['categoryid']))
 		{
-			Local\Util\Page::displayError('请选择分类');
+			Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('Please select a category'));
 		}
 
 		if (empty($data['url']))
 		{
-			Local\Util\Page::displayError('项目URL不能为空');
+			Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('Project URL cannot be empty'));
 		}
 
 		if (empty($data['memo']))
 		{
-			Local\Util\Page::displayError('项目备注不能为空');
+			Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('Project description cannot be empty'));
 		}
 
 		$this->models['gitModel']->saveData($data);
 		unset($data);
 
-		Local\Util\Page::displayMessage('提交成功，管理员审核通过后显示，请耐心等待。', '/add');
+		Local\Util\Page::displayMessage(Yaf\Registry::get('lang')->translate('Successful submission Please wait for audit'), '/add');
 
 		return FALSE;
 	}

@@ -27,7 +27,7 @@ class SearchController extends Local\Controller\Base
 	 */
 	public function indexAction()
 	{
-		$title = '搜索';
+		$title = Yaf\Registry::get('lang')->translate('Search');
 		$this->getView()->assign('title', $title);
 	}
 

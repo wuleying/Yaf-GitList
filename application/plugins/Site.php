@@ -31,7 +31,8 @@ class SitePlugin extends Yaf\Plugin_Abstract
 
 		if (Yaf\Registry::get('setting')['closesite'])
 		{
-			if (!in_array(Yaf\Registry::get('userInfo')['usergroupid'], explode(',', Yaf\Registry::get('setting')['closesiteusergroupid'])))
+			$userinfo = Yaf\Registry::get('userInfo');
+			if (empty($userinfo)  || !in_array($userinfo['usergroupid'], explode(',', Yaf\Registry::get('setting')['closesiteusergroupid'])))
 			{
 				$view = new Yaf\View\Simple($request);
 				$view->setScriptPath(Yaf\Registry::get('config')->application->view->path);

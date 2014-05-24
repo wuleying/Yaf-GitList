@@ -27,7 +27,7 @@ class ExploreController extends Local\Controller\Base
 	 */
 	public function indexAction()
 	{
-		$title = '发现';
+		$title = Yaf\Registry::get('lang')->translate('Explore');
 		$this->getView()->assign('title', $title);
 	}
 

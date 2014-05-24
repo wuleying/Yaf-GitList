@@ -35,7 +35,7 @@ class SettingsController extends Local\Controller\Base
 	 */
 	public function accountAction()
 	{
-		$title = '账号';
+		$title = Yaf\Registry::get('lang')->translate('Account');
 		$this->getView()->assign('title', $title);
 	}
 

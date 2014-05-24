@@ -135,14 +135,14 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
 	/**
 	 * 国际化
 	 *
-	 * @todo 额，这个后期再做吧
-	 *
 	 */
 	public function _initTranslator()
 	{
-		$translator = new Zend\I18n\Translator\Translator();
-		Yaf\Registry::set('translator', $translator);
-		unset($translator);
+		$lang = new Zend\I18n\Translator\Translator();
+		$lang->setLocale('zh_CN');
+		$lang->addTranslationFilePattern('phparray', APP_PATH . DS . 'application' . DS . 'language', '%s.php');
+		Yaf\Registry::set('lang', $lang);
+		unset($lang);
 	}
 
 	/**

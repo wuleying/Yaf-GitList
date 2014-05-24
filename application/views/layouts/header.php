@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta name="description" content=""/>
-<title><?php echo $title; ?> - Github 优秀项目推荐</title>
+<title><?php echo $title; ?> - <?php echo Yaf\Registry::get('setting')['sitedescription']; ?></title>
 <link rel="stylesheet" href="<?php echo SYSTEMURL;?>/css/bootstrap.min.css" type="text/css" media="screen,print" />
 <link rel="stylesheet" href="<?php echo SYSTEMURL;?>/css/common.css" type="text/css" media="screen,print" />
 <link rel="stylesheet" href="<?php echo SYSTEMURL;?>/css/site.css" type="text/css" media="screen,print" />
@@ -14,7 +14,7 @@
 <body>
 
 <?php if(Yaf\Registry::get('setting')['closesite']) : ?>
-	<div class="alert alert-warning text-center siteclosed"><strong>警告</strong> 站点处于关闭中！</div>
+	<div class="alert alert-warning text-center siteclosed"><strong><?php echo Yaf\Registry::get('lang')->translate('Warning');?></strong> <?php echo Yaf\Registry::get('lang')->translate('The site is closed');?></div>
 <?php endif;?>
 
 <!-- Navbar -->
@@ -25,35 +25,35 @@
 	</div>
 	<div class="navbar-collapse collapse">
 		<ul class="nav navbar-nav nav-menu">
-			<li<?php if ('index' == CONTROLLER_NAME) : ?> class="active"<?php endif; ?>><a href="<?php echo SYSTEMURL;?>">首页</a></li>
-			<li<?php if ('category' == CONTROLLER_NAME) : ?> class="active"<?php endif; ?>><a href="<?php echo SYSTEMURL;?>/category">分类</a></li>
-			<li<?php if ('explore' == CONTROLLER_NAME) : ?> class="active"<?php endif; ?>><a href="<?php echo SYSTEMURL;?>/explore">发现</a></li>
+			<li<?php if ('index' == CONTROLLER_NAME) : ?> class="active"<?php endif; ?>><a href="<?php echo SYSTEMURL;?>"><?php echo Yaf\Registry::get('lang')->translate('Home');?></a></li>
+			<li<?php if ('category' == CONTROLLER_NAME) : ?> class="active"<?php endif; ?>><a href="<?php echo SYSTEMURL;?>/category"><?php echo Yaf\Registry::get('lang')->translate('Category');?></a></li>
+			<li<?php if ('explore' == CONTROLLER_NAME) : ?> class="active"<?php endif; ?>><a href="<?php echo SYSTEMURL;?>/explore"><?php echo Yaf\Registry::get('lang')->translate('Explore');?></a></li>
 		</ul>
 
 		<form class="navbar-form navbar-left search-from" role="search" method="get" action="<?php echo SYSTEMURL;?>/search">
 		  <div class="form-group">
-			<input type="text" name="keyword" class="form-control search-input" placeholder="搜索项目或项目作者" />
+			<input type="text" name="keyword" class="form-control search-input" placeholder="<?php echo Yaf\Registry::get('lang')->translate('Search the project or a project the author');?>" />
 		  </div>
-		  <button type="submit" class="btn btn-default">搜索</button>
+		  <button type="submit" class="btn btn-default"><?php echo Yaf\Registry::get('lang')->translate('Search');?></button>
 		</form>
 
-		<div class="navbar-left add-git"><a href="<?php echo SYSTEMURL;?>/add" class="btn btn-success">提交GIT</a></div>
+		<div class="navbar-left add-git"><a href="<?php echo SYSTEMURL;?>/add" class="btn btn-success"><?php echo Yaf\Registry::get('lang')->translate('Submit GIT');?></a></div>
 
 		<ul class="nav navbar-nav user-information">
 			<?php if(Yaf\Registry::get('userInfo')) : ?>
 			  <li class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown" title="<?php echo Yaf\Registry::get('userInfo')['email'];?>"><?php echo Yaf\Registry::get('userInfo')['email'];?><b class="caret"></b></a>
 				<ul class="dropdown-menu">
-				  <li><a href="<?php echo SYSTEMURL;?>/people/<?php echo Yaf\Registry::get('userInfo')['email'];?>">我的主页</a></li>
-				  <li><a href="<?php echo SYSTEMURL;?>/inbox">私信 <span class="badge">4</span></a></li>
-				  <li><a href="<?php echo SYSTEMURL;?>/settings/account">设置</a></li>
+				  <li><a href="<?php echo SYSTEMURL;?>/people/<?php echo Yaf\Registry::get('userInfo')['email'];?>"><?php echo Yaf\Registry::get('lang')->translate('My home page');?></a></li>
+				  <li><a href="<?php echo SYSTEMURL;?>/inbox"><?php echo Yaf\Registry::get('lang')->translate('PM');?> <span class="badge">4</span></a></li>
+				  <li><a href="<?php echo SYSTEMURL;?>/settings/account"><?php echo Yaf\Registry::get('lang')->translate('Setting');?></a></li>
 				  <li class="divider"></li>
-				  <li><a href="<?php echo SYSTEMURL;?>/logout">退出</a></li>
+				  <li><a href="<?php echo SYSTEMURL;?>/logout"><?php echo Yaf\Registry::get('lang')->translate('Logout');?></a></li>
 				</ul>
 			  </li>
 			<?php else: ?>
-				<li><a href="<?php echo SYSTEMURL;?>/register">注册</a></li>
-				<li><a href="<?php echo SYSTEMURL;?>/login">登录</a></li>
+				<li><a href="<?php echo SYSTEMURL;?>/register"><?php echo Yaf\Registry::get('lang')->translate('Register');?></a></li>
+				<li><a href="<?php echo SYSTEMURL;?>/login"><?php echo Yaf\Registry::get('lang')->translate('Login');?></a></li>
 			<?php endif; ?>
 		</ul>
 	</div>

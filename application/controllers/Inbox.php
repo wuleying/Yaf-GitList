@@ -24,7 +24,7 @@ class InboxController extends Local\Controller\Base
 	 */
 	public function indexAction()
 	{
-		$title = '私信';
+		$title = Yaf\Registry::get('lang')->translate('PM');
 		$this->getView()->assign('title', $title);
 	}
 

@@ -24,7 +24,7 @@ class IndexController extends Local\Controller\Base
 	 */
 	public function indexAction()
 	{
-		$title = '首页';
+		$title = Yaf\Registry::get('lang')->translate('Home');
 		$this->getView()->assign('title', $title);
 	}
 
