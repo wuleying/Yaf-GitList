@@ -32,7 +32,7 @@ class LoginController extends Local\Controller\Base
 	 */
 	public function indexAction()
 	{
-		$title = '管理员登录';
+		$title = Yaf\Registry::get('lang')->translate('Admin login');
 		$this->getView()->assign('title', $title);
 	}
 
@@ -50,24 +50,24 @@ class LoginController extends Local\Controller\Base
 
 		if (empty($email))
 		{
-			die('请填写邮箱');
+			Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('Please enter email'));
 		}
 
 		if (empty($password))
 		{
-			die('请输入密码');
+			Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('Please enter password'));
 		}
 
 		if (!filter_var($email, FILTER_VALIDATE_EMAIL))
 		{
-			die('邮箱格式不正确');
+			Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('Email format error'));
 		}
 
 		$adminInfo = $this->models['userModel']->getUserByEmail($email);
 
 		if (empty($adminInfo))
 		{
-			die('用户不存在');
+			Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('User not exist'));
 		}
 
 		// 检查密码
@@ -89,12 +89,12 @@ class LoginController extends Local\Controller\Base
 			}
 			else
 			{
-				die('无权限');
+				Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('Not permission'));
 			}
 		}
 		else
 		{
-			die('密码不正确');
+			Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('Email or password is not correct'));
 		}
 
 		return FALSE;

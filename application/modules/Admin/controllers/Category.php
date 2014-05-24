@@ -45,7 +45,7 @@ class CategoryController extends Local\Controller\Base
 		$categories = $this->models['categoryModel']->getCategoryByParentid($parentid);
 		$this->getView()->assign('categories', $categories);
 
-		$title = '分类管理';
+		$title = Yaf\Registry::get('lang')->translate('Category management');
 		$this->getView()->assign('parentid', $parentid);
 		$this->getView()->assign('title', $title);
 		$this->getView()->assign('breadCrumb', Local\Util\Page::dispayBreadCrumb($title, array(), TRUE));
@@ -65,7 +65,7 @@ class CategoryController extends Local\Controller\Base
 		if ($id)
 		{
 			$categoryInfo = $this->models['categoryModel']->getCategoryById($id);
-			$title = '编辑分类';
+			$title = Yaf\Registry::get('lang')->translate('Edit category');
 		}
 		else
 		{
@@ -75,16 +75,18 @@ class CategoryController extends Local\Controller\Base
 				'categoryname' => '',
 				'sort' => SORT_DEFAULT_VALUE
 			);
-			$title = '添加分类';
+			$title = Yaf\Registry::get('lang')->translate('Add category');
 		}
 
 		// 读取缓存
-		$categoryCache =  $this->models['categoryModel']->getAllCategoriesByCache();
+		$categoryCache = $this->models['categoryModel']->getAllCategoriesByCache();
 
 		$this->getView()->assign('categoryInfo', $categoryInfo);
 		$this->getView()->assign('categoryList', Local\Util\Page::displayCategorySelector($categoryCache['list'], $categoryInfo['parentid']));
 		$this->getView()->assign('title', $title);
-		$this->getView()->assign('breadCrumb', Local\Util\Page::dispayBreadCrumb($title, array(), TRUE));
+		$breadCrumb[ADMINURL . '/category/index'] = Yaf\Registry::get('lang')->translate('Category management');
+		$breadCrumb[] = $title;
+		$this->getView()->assign('breadCrumb', Local\Util\Page::dispayBreadCrumb($title, $breadCrumb, TRUE));
 		unset($categoryInfo, $categoryCache);
 	}
 
@@ -103,13 +105,7 @@ class CategoryController extends Local\Controller\Base
 
 		if (empty($data['categoryname']))
 		{
-			die('请输入分类名称');
-		}
-
-		// @todo 这里还有点问题，父级分类不能设置为子分类的子分类，否则会出现逻辑错误
-		if ($data['categoryid'] && ($data['categoryid'] == $data['parentid']))
-		{
-			die('不能成为自身的父分类');
+			Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('Please enter category name'));
 		}
 
 		$this->models['categoryModel']->saveData($data);

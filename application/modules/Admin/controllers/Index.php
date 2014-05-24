@@ -37,7 +37,7 @@ class IndexController extends Local\Controller\Base
 	 */
 	public function indexAction()
 	{
-		$title = '管理首页';
+		$title = Yaf\Registry::get('lang')->translate('Admin home');
 		$this->getView()->assign('title', $title);
 		$this->getView()->assign('breadCrumb', Local\Util\Page::dispayBreadCrumb($title, array(), TRUE));
 	}

@@ -42,7 +42,7 @@ class SettingController extends Local\Controller\Base
 		$setting = $this->models['settingModel']->getAllSetting();
 		$this->getView()->assign('settings', $setting);
 
-		$title = '管理首页';
+		$title = Yaf\Registry::get('lang')->translate('System setting');
 		$this->getView()->assign('title', $title);
 		$this->getView()->assign('breadCrumb', Local\Util\Page::dispayBreadCrumb($title, array(), TRUE));
 	}

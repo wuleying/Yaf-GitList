@@ -51,7 +51,7 @@ class ReviewController extends Local\Controller\Base
 		$this->getView()->assign('gits', $gits);
 		$this->getView()->assign('pageNav', Local\Util\Page::pageNav($page, $pageTotal, ADMINURL . '/review/index'));
 
-		$title = '审核内容';
+		$title = Yaf\Registry::get('lang')->translate('Review content');
 		$this->getView()->assign('title', $title);
 		$this->getView()->assign('breadCrumb', Local\Util\Page::dispayBreadCrumb($title, array(), TRUE));
 	}
@@ -69,13 +69,11 @@ class ReviewController extends Local\Controller\Base
 		$id = (int) $id;
 		if (empty($id))
 		{
-			Local\Util\Page::displayError('参数不正确');
+			Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('Incorrect parameter'));
 		}
 
 		$this->models['gitModel']->reviewGit($id, $approved);
-
 		$this->redirect('/admin/review/index');
-
 		return FALSE;
 	}
 

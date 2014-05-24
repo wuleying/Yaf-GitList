@@ -45,7 +45,7 @@ class UserGroupController extends Local\Controller\Base
 		// 写入缓存 @todo 要移动到编辑用户组ACTION
 		Yaf\Registry::get('memcache')->set('usergroup', $userGroups, MEMCACHE_NEVER_TIMEOUT);
 
-		$title = '管理首页';
+		$title = Yaf\Registry::get('lang')->translate('User group management');
 		$this->getView()->assign('title', $title);
 		$this->getView()->assign('breadCrumb', Local\Util\Page::dispayBreadCrumb($title, array(), TRUE));
 	}
@@ -56,9 +56,12 @@ class UserGroupController extends Local\Controller\Base
 	 */
 	public function editAction()
 	{
-		$title = '编辑用户组';
+		$title = Yaf\Registry::get('lang')->translate('Edit user group');
+		$breadCrumb[ADMINURL . '/usergroup/index'] = Yaf\Registry::get('lang')->translate('User group management');
+		$breadCrumb[] = $title;
+
 		$this->getView()->assign('title', $title);
-		$this->getView()->assign('breadCrumb', Local\Util\Page::dispayBreadCrumb($title, array(), TRUE));
+		$this->getView()->assign('breadCrumb', Local\Util\Page::dispayBreadCrumb($title, $breadCrumb, TRUE));
 	}
 
 }

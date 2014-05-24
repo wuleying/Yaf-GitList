@@ -49,38 +49,38 @@ class RegisterController extends Local\Controller\Base
 
 		if (empty($email))
 		{
-			Local\Util\Page::displayError('请填写邮箱');
+			Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('Please enter email'));
 		}
 
 		if (empty($password))
 		{
-			Local\Util\Page::displayError('请输入密码');
+			Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('Please enter password'));
 		}
 
 		if (!filter_var($email, FILTER_VALIDATE_EMAIL))
 		{
-			Local\Util\Page::displayError('邮箱格式不正确');
+			Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('Email format error'));
 		}
 
 		if (strlen($password) < USER_PASSWORD_MIN || strlen($password) > USER_PASSWORD_MAX)
 		{
-			Local\Util\Page::displayError('密码长度不正确');
+			Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('Password length is not correct'));
 		}
 
 		if ($password != $repassword)
 		{
-			Local\Util\Page::displayError('两次密码输入不一致');
+			Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('The two passwords do not match'));
 		}
 
 		// 查询邮箱是否已经注册
 		if ($this->models['userModel']->getUserByEmail($email))
 		{
-			Local\Util\Page::displayError('此邮箱已注册');
+			Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('Email registered'));
 		}
 
 		// 写入数据
 		$this->models['userModel']->newUser($email, $password);
-		Local\Util\Page::displayMessage('注册成功', '/login');
+		Local\Util\Page::displayMessage(Yaf\Registry::get('lang')->translate('Register successful'), '/login');
 	}
 
 }

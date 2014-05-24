@@ -51,7 +51,7 @@ class ContentController extends Local\Controller\Base
 		$this->getView()->assign('gits', $gits);
 		$this->getView()->assign('pageNav', Local\Util\Page::pageNav($page, $pageTotal, ADMINURL . '/content/index'));
 
-		$title = '内容管理';
+		$title = Yaf\Registry::get('lang')->translate('Content management');
 		$this->getView()->assign('title', $title);
 		$this->getView()->assign('breadCrumb', Local\Util\Page::dispayBreadCrumb($title, array(), TRUE));
 	}
@@ -67,11 +67,11 @@ class ContentController extends Local\Controller\Base
 		$id = (int) $id;
 		if (empty($id))
 		{
-			Local\Util\Page::displayError('参数不正确');
+			Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('Incorrect parameter'));
 		}
 
-		$title = '编辑内容';
-		$breadCrumb[ADMINURL . '/content/index'] = '内容管理';
+		$title = Yaf\Registry::get('lang')->translate('Edit content');
+		$breadCrumb[ADMINURL . '/content/index'] = Yaf\Registry::get('lang')->translate('Content management');
 		$breadCrumb[] = $title;
 		$this->getView()->assign('title', $title);
 		$this->getView()->assign('breadCrumb', Local\Util\Page::dispayBreadCrumb($title, $breadCrumb, TRUE));
