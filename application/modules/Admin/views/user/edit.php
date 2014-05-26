@@ -5,11 +5,11 @@
 		<table class="table table-striped clearfix">
 			<tbody>
 				<tr>
-					<td width="10%">邮箱</td>
+					<td width="10%"><?php echo Yaf\Registry::get('lang')->translate('Email');?></td>
 					<td><div class="col-xs-3"><?php echo $userInfo['email']; ?></div></td>
 				</tr>
 				<tr>
-					<td>用户组</td>
+					<td><?php echo Yaf\Registry::get('lang')->translate('User group');?></td>
 					<td>
 						<div class="col-xs-3">
 							<select name="usergroupid" class="form-control">
@@ -21,13 +21,13 @@
 					</td>
 				</tr>
 				<tr>
-					<td>新密码</td>
+					<td><?php echo Yaf\Registry::get('lang')->translate('New password');?></td>
 					<td><div class="col-xs-3"><input type="text" name="password" class="form-control" maxlength="16" value="" /></div></td>
 				</tr>
 			</tbody>
 			<tfoot>
 				<tr>
-					<td colspan="2"><input type="submit" class="btn btn-primary" value="确定" /></td>
+					<td colspan="2"><input type="submit" class="btn btn-primary" value="<?php echo Yaf\Registry::get('lang')->translate('Confirm');?>" /></td>
 				</tr>
 			</tfoot>
 		</table>

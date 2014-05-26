@@ -5,10 +5,10 @@
 			<thead>
 				<tr>
 					<th width="8%">ID</th>
-					<th>项目名称</th>
-					<th width="15%">提交人</th>
-					<th width="15%">提交时间</th>
-					<th width="130">操作</th>
+					<th><?php echo Yaf\Registry::get('lang')->translate('Project name');?></th>
+					<th width="15%"><?php echo Yaf\Registry::get('lang')->translate('Submitter Name');?></th>
+					<th width="15%"><?php echo Yaf\Registry::get('lang')->translate('Submission time');?></th>
+					<th width="130"><?php echo Yaf\Registry::get('lang')->translate('Operation');?></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -19,8 +19,8 @@
 						<td><a href=""><?php echo $git['userid'];?></a></td>
 						<td><?php echo Local\Util\Time::formatDate($git['dateline']);?></td>
 						<td>
-							<a href="<?php echo ADMINURL?>/content/edit/id/<?php echo $git['gitid']; ?>" class="btn btn-success">编辑</a>
-							<a href="<?php echo ADMINURL?>/content/delete/id/<?php echo $git['gitid']; ?>" class="btn btn-danger">删除</a>
+							<a href="<?php echo ADMINURL?>/content/edit/id/<?php echo $git['gitid']; ?>" class="btn btn-success"><?php echo Yaf\Registry::get('lang')->translate('Edit');?></a>
+							<a href="<?php echo ADMINURL?>/content/delete/id/<?php echo $git['gitid']; ?>" class="btn btn-danger"><?php echo Yaf\Registry::get('lang')->translate('Delete');?></a>
 						</td>
 					</tr>
 				<?php endforeach; ?>

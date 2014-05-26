@@ -62,11 +62,11 @@ class Page
 	{
 		if ($isAdmin)
 		{
-			$breadCrumbArray[ADMINURL] = '控制台';
+			$breadCrumbArray[ADMINURL] = \Yaf\Registry::get('lang')->translate('Console');
 		}
 		else
 		{
-			$breadCrumbArray[SYSTEMURL] = '首页';
+			$breadCrumbArray[SYSTEMURL] = \Yaf\Registry::get('lang')->translate('Home');
 		}
 		// 面包屑导航
 		if (empty($breadCrumb))
@@ -161,8 +161,8 @@ class Page
 				$formElement .= "<input type=\"password\" class=\"form-control\" name=\"{$name}\" value=\"{$value}\" />";
 				break;
 			case 2 :
-				$formElement .= "<input type=\"radio\" name=\"{$name}\" value=\"1\" " . ($value ? 'checked' : '') . " /> 是 ";
-				$formElement .= "<input type=\"radio\" name=\"{$name}\" value=\"0\" " . (!$value ? 'checked' : '') . " /> 否 ";
+				$formElement .= "<input type=\"radio\" name=\"{$name}\" value=\"1\" " . ($value ? 'checked' : '') . " /> " . \Yaf\Registry::get('lang')->translate('Yes') . " ";
+				$formElement .= "<input type=\"radio\" name=\"{$name}\" value=\"0\" " . (!$value ? 'checked' : '') . " /> " . \Yaf\Registry::get('lang')->translate('No') . " ";
 				break;
 			case 3 :
 				break;
@@ -218,7 +218,7 @@ class Page
 	public static function displayMessage($message, $url = '', $time = 3, $template = 'error/message.php')
 	{
 		$request = new \Yaf\Request\Simple();
-		if(empty($url))
+		if (empty($url))
 		{
 			$url = $request->getServer()['HTTP_REFERER'];
 		}

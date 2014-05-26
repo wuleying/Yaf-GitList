@@ -5,28 +5,28 @@
 		<table class="table table-striped clearfix">
 			<tbody>
 				<tr>
-					<td width="10%">分类名称</td>
+					<td width="10%"><?php echo Yaf\Registry::get('lang')->translate('Category name');?></td>
 					<td><div class="col-xs-3"><input type="text" class="form-control" maxlength="16" name="categoryname" value="<?php echo $categoryInfo['categoryname']; ?>" /></div></td>
 				</tr>
 				<tr>
-					<td>上级分类</td>
+					<td><?php echo Yaf\Registry::get('lang')->translate('Parent category');?></td>
 					<td>
 						<div class="col-xs-3">
 							<select name="parentid" class="form-control">
-								<option value="0">无</option>
+								<option value="0"><?php echo Yaf\Registry::get('lang')->translate('Nothing');?></option>
 								<?php echo $categoryList;?>
 							</select>
 						</div>
 					</td>
 				</tr>
 				<tr>
-					<td width="10%">排序</td>
+					<td width="10%"><?php echo Yaf\Registry::get('lang')->translate('Sort');?></td>
 					<td><div class="col-xs-1"><input type="text" class="form-control" maxlength="3" name="sort" value="<?php echo $categoryInfo['sort']; ?>" /></div></td>
 				</tr>
 			</tbody>
 			<tfoot>
 				<tr>
-					<td colspan="2"><input type="submit" class="btn btn-primary" value="确定" /></td>
+					<td colspan="2"><input type="submit" class="btn btn-primary" value="<?php echo Yaf\Registry::get('lang')->translate('Confirm');?>" /></td>
 				</tr>
 			</tfoot>
 		</table>

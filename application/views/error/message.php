@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta name="description" content=""/>
-<title>提示信息 - Github 优秀项目推荐</title>
+<title><?php echo Yaf\Registry::get('lang')->translate('Prompt information');?> - <?php echo Yaf\Registry::get('setting')['sitedescription']; ?></title>
 <link rel="stylesheet" href="<?php echo SYSTEMURL;?>/css/bootstrap.min.css" type="text/css" media="screen,print" />
 <link rel="stylesheet" href="<?php echo SYSTEMURL;?>/css/error.css" type="text/css" media="screen,print" />
 <script src="<?php echo SYSTEMURL;?>/js/jquery.min.js"></script>
@@ -13,11 +13,11 @@
 <body>
 
 	<div class="panel panel-primary error">
-		<div class="panel-heading"><h3 class="panel-title">提示信息</h3></div>
+		<div class="panel-heading"><h3 class="panel-title"><?php echo Yaf\Registry::get('lang')->translate('Prompt information');?></h3></div>
 		<div class="panel-body">
 			<h3>
-			<?php echo $message; ?>，<span id="redirecttime"><?php echo $time;?></span> 秒后返回，或
-			<a href="<?php echo $url;?>">点击这里</a>
+			<?php echo $message; ?><br /><span id="redirecttime"><?php echo $time;?></span> <?php echo Yaf\Registry::get('lang')->translate('Seconds after the return');?>，<?php echo Yaf\Registry::get('lang')->translate('Or');?>
+			<a href="<?php echo $url;?>"><?php echo Yaf\Registry::get('lang')->translate('Click here');?></a>
 			</h3>
 		</div>
 	</div>

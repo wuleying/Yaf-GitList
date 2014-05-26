@@ -5,10 +5,10 @@
 			<table class="table table-striped table-bordered clearfix">
 				<thead>
 					<tr>
-						<th width="15%">变量名称</th>
-						<th width="28%">参数说明</th>
-						<th>参数值</th>
-						<th width="5%">排序</th>
+						<th width="15%"><?php echo Yaf\Registry::get('lang')->translate('Parameter name');?></th>
+						<th width="28%"><?php echo Yaf\Registry::get('lang')->translate('Parameter explanation');?></th>
+						<th><?php echo Yaf\Registry::get('lang')->translate('Parameter value');?></th>
+						<th width="5%"><?php echo Yaf\Registry::get('lang')->translate('Sort');?></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -23,7 +23,7 @@
 				</tbody>
 				<tfoot>
 					<tr>
-						<td colspan="4"><input type="submit" class="btn btn-primary" value="确定" /></td>
+						<td colspan="4"><input type="submit" class="btn btn-primary" value="<?php echo Yaf\Registry::get('lang')->translate('Confirm');?>" /></td>
 					</tr>
 				</tfoot>
 			</table>
