@@ -6,6 +6,8 @@
  * @author $Author: 5590548@qq.com $
  *
  */
+use Local\Util\Page;
+
 class ContentController extends Local\Controller\Base
 {
 
@@ -48,11 +50,11 @@ class ContentController extends Local\Controller\Base
 
 		$gits = $this->models['gitModel']->getAllGit(CONTENT_APPROVED, 'dateline DESC', $offset, PERPAGE);
 		$this->getView()->assign('gits', $gits);
-		$this->getView()->assign('pageNav', Local\Util\Page::pageNav($page, $pageTotal, ADMINURL . '/content/index'));
+		$this->getView()->assign('pageNav', Page::pageNav($page, $pageTotal, ADMINURL . '/content/index'));
 
 		$title = Yaf\Registry::get('lang')->translate('Content management');
 		$this->getView()->assign('title', $title);
-		$this->getView()->assign('breadCrumb', Local\Util\Page::dispayBreadCrumb($title, array(), TRUE));
+		$this->getView()->assign('breadCrumb', Page::dispayBreadCrumb($title, array(), TRUE));
 	}
 
 	/**
@@ -66,14 +68,14 @@ class ContentController extends Local\Controller\Base
 		$id = (int) $id;
 		if (empty($id))
 		{
-			Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('Incorrect parameter'));
+			Page::displayError(Yaf\Registry::get('lang')->translate('Incorrect parameter'));
 		}
 
 		$title = Yaf\Registry::get('lang')->translate('Edit content');
 		$breadCrumb[ADMINURL . '/content/index'] = Yaf\Registry::get('lang')->translate('Content management');
 		$breadCrumb[] = $title;
 		$this->getView()->assign('title', $title);
-		$this->getView()->assign('breadCrumb', Local\Util\Page::dispayBreadCrumb($title, $breadCrumb, TRUE));
+		$this->getView()->assign('breadCrumb', Page::dispayBreadCrumb($title, $breadCrumb, TRUE));
 	}
 
 }

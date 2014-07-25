@@ -6,6 +6,8 @@
  * @author $Author: 5590548@qq.com $
  *
  */
+use Local\Util\Page;
+
 class ReviewController extends Local\Controller\Base
 {
 
@@ -48,11 +50,11 @@ class ReviewController extends Local\Controller\Base
 
 		$gits = $this->models['gitModel']->getAllGit(CONTENT_UNAPPROVED, 'dateline DESC', $offset, PERPAGE);
 		$this->getView()->assign('gits', $gits);
-		$this->getView()->assign('pageNav', Local\Util\Page::pageNav($page, $pageTotal, ADMINURL . '/review/index'));
+		$this->getView()->assign('pageNav', Page::pageNav($page, $pageTotal, ADMINURL . '/review/index'));
 
 		$title = Yaf\Registry::get('lang')->translate('Review content');
 		$this->getView()->assign('title', $title);
-		$this->getView()->assign('breadCrumb', Local\Util\Page::dispayBreadCrumb($title, array(), TRUE));
+		$this->getView()->assign('breadCrumb', Page::dispayBreadCrumb($title, array(), TRUE));
 	}
 
 	/**
@@ -68,7 +70,7 @@ class ReviewController extends Local\Controller\Base
 		$id = (int) $id;
 		if (empty($id))
 		{
-			Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('Incorrect parameter'));
+			Page::displayError(Yaf\Registry::get('lang')->translate('Incorrect parameter'));
 		}
 
 		$this->models['gitModel']->reviewGit($id, $approved);

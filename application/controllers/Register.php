@@ -6,6 +6,8 @@
  * @author $Author: 5590548@qq.com $
  *
  */
+use Local\Util\Page;
+
 class RegisterController extends Local\Controller\Base
 {
 
@@ -49,38 +51,38 @@ class RegisterController extends Local\Controller\Base
 
 		if (empty($email))
 		{
-			Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('Please enter email'));
+			Page::displayError(Yaf\Registry::get('lang')->translate('Please enter email'));
 		}
 
 		if (empty($password))
 		{
-			Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('Please enter password'));
+			Page::displayError(Yaf\Registry::get('lang')->translate('Please enter password'));
 		}
 
 		if (!filter_var($email, FILTER_VALIDATE_EMAIL))
 		{
-			Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('Email format error'));
+			Page::displayError(Yaf\Registry::get('lang')->translate('Email format error'));
 		}
 
 		if (strlen($password) < USER_PASSWORD_MIN || strlen($password) > USER_PASSWORD_MAX)
 		{
-			Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('Password length is not correct'));
+			Page::displayError(Yaf\Registry::get('lang')->translate('Password length is not correct'));
 		}
 
 		if ($password != $repassword)
 		{
-			Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('The two passwords do not match'));
+			Page::displayError(Yaf\Registry::get('lang')->translate('The two passwords do not match'));
 		}
 
 		// 查询邮箱是否已经注册
 		if ($this->models['userModel']->getUserByEmail($email))
 		{
-			Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('Email registered'));
+			Page::displayError(Yaf\Registry::get('lang')->translate('Email registered'));
 		}
 
 		// 写入数据
 		$this->models['userModel']->newUser($email, $password);
-		Local\Util\Page::displayMessage(Yaf\Registry::get('lang')->translate('Register successful'), '/login');
+		Page::displayMessage(Yaf\Registry::get('lang')->translate('Register successful'), '/login');
 	}
 
 }

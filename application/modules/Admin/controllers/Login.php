@@ -6,6 +6,8 @@
  * @author $Author: 5590548@qq.com $
  *
  */
+use Local\Util\Page;
+
 class LoginController extends Local\Controller\Base
 {
 
@@ -50,24 +52,24 @@ class LoginController extends Local\Controller\Base
 
 		if (empty($email))
 		{
-			Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('Please enter email'));
+			Page::displayError(Yaf\Registry::get('lang')->translate('Please enter email'));
 		}
 
 		if (empty($password))
 		{
-			Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('Please enter password'));
+			Page::displayError(Yaf\Registry::get('lang')->translate('Please enter password'));
 		}
 
 		if (!filter_var($email, FILTER_VALIDATE_EMAIL))
 		{
-			Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('Email format error'));
+			Page::displayError(Yaf\Registry::get('lang')->translate('Email format error'));
 		}
 
 		$adminInfo = $this->models['userModel']->getUserByEmail($email);
 
 		if (empty($adminInfo))
 		{
-			Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('User not exist'));
+			Page::displayError(Yaf\Registry::get('lang')->translate('User not exist'));
 		}
 
 		// 检查密码
@@ -89,12 +91,12 @@ class LoginController extends Local\Controller\Base
 			}
 			else
 			{
-				Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('Not permission'));
+				Page::displayError(Yaf\Registry::get('lang')->translate('Not permission'));
 			}
 		}
 		else
 		{
-			Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('Email or password is not correct'));
+			Page::displayError(Yaf\Registry::get('lang')->translate('Email or password is not correct'));
 		}
 
 		return FALSE;

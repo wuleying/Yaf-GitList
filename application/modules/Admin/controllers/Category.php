@@ -6,6 +6,8 @@
  * @author $Author: 5590548@qq.com $
  *
  */
+use Local\Util\Page;
+
 class CategoryController extends Local\Controller\Base
 {
 
@@ -48,7 +50,7 @@ class CategoryController extends Local\Controller\Base
 		$title = Yaf\Registry::get('lang')->translate('Category management');
 		$this->getView()->assign('parentid', $parentid);
 		$this->getView()->assign('title', $title);
-		$this->getView()->assign('breadCrumb', Local\Util\Page::dispayBreadCrumb($title, array(), TRUE));
+		$this->getView()->assign('breadCrumb', Page::dispayBreadCrumb($title, array(), TRUE));
 	}
 
 	/**
@@ -82,11 +84,11 @@ class CategoryController extends Local\Controller\Base
 		$categoryCache = $this->models['categoryModel']->getAllCategoriesByCache();
 
 		$this->getView()->assign('categoryInfo', $categoryInfo);
-		$this->getView()->assign('categoryList', Local\Util\Page::displayCategorySelector($categoryCache['list'], $categoryInfo['parentid']));
+		$this->getView()->assign('categoryList', Page::displayCategorySelector($categoryCache['list'], $categoryInfo['parentid']));
 		$this->getView()->assign('title', $title);
 		$breadCrumb[ADMINURL . '/category/index'] = Yaf\Registry::get('lang')->translate('Category management');
 		$breadCrumb[] = $title;
-		$this->getView()->assign('breadCrumb', Local\Util\Page::dispayBreadCrumb($title, $breadCrumb, TRUE));
+		$this->getView()->assign('breadCrumb', Page::dispayBreadCrumb($title, $breadCrumb, TRUE));
 		unset($categoryInfo, $categoryCache);
 	}
 
@@ -105,7 +107,7 @@ class CategoryController extends Local\Controller\Base
 
 		if (empty($data['categoryname']))
 		{
-			Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('Please enter category name'));
+			Page::displayError(Yaf\Registry::get('lang')->translate('Please enter category name'));
 		}
 
 		$this->models['categoryModel']->saveData($data);

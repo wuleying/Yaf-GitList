@@ -6,6 +6,8 @@
  * @author $Author: 5590548@qq.com $
  *
  */
+use Local\Util\Page;
+
 class UserController extends Local\Controller\Base
 {
 
@@ -51,14 +53,14 @@ class UserController extends Local\Controller\Base
 		$users = $this->models['userModel']->getAllUsers(0, 'lasttime DESC', $offset, PERPAGE);
 
 		$this->getView()->assign('users', $users);
-		$this->getView()->assign('pageNav', Local\Util\Page::pageNav($page, $pageTotal, ADMINURL . '/user/index'));
+		$this->getView()->assign('pageNav', Page::pageNav($page, $pageTotal, ADMINURL . '/user/index'));
 
 		// 获取用户组缓存
 		$this->getView()->assign('userGroups', $this->models['userGroupModel']->getAllUserGroupsByCache());
 
 		$title = Yaf\Registry::get('lang')->translate('User management');
 		$this->getView()->assign('title', $title);
-		$this->getView()->assign('breadCrumb', Local\Util\Page::dispayBreadCrumb($title, array(), TRUE));
+		$this->getView()->assign('breadCrumb', Page::dispayBreadCrumb($title, array(), TRUE));
 	}
 
 	/**
@@ -75,7 +77,7 @@ class UserController extends Local\Controller\Base
 
 		if (empty($userInfo))
 		{
-			Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('User not exist'));
+			Page::displayError(Yaf\Registry::get('lang')->translate('User not exist'));
 		}
 
 		$this->getView()->assign('userInfo', $userInfo);
@@ -86,7 +88,7 @@ class UserController extends Local\Controller\Base
 		$breadCrumb[ADMINURL . '/user/index'] = Yaf\Registry::get('lang')->translate('User management');
 		$breadCrumb[] = $title;
 		$this->getView()->assign('title', $title);
-		$this->getView()->assign('breadCrumb', Local\Util\Page::dispayBreadCrumb($title, $breadCrumb, TRUE));
+		$this->getView()->assign('breadCrumb', Page::dispayBreadCrumb($title, $breadCrumb, TRUE));
 	}
 
 	/**
@@ -102,18 +104,18 @@ class UserController extends Local\Controller\Base
 
 		if (empty($data['userid']))
 		{
-			Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('Please select a user'));
+			Page::displayError(Yaf\Registry::get('lang')->translate('Please select a user'));
 		}
 
 		if (empty($data['usergroupid']))
 		{
-			Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('Please select a user group'));
+			Page::displayError(Yaf\Registry::get('lang')->translate('Please select a user group'));
 		}
 
 		$userInfo = $this->models['userModel']->getUserById($data['userid']);
 		if (empty($userInfo))
 		{
-			Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('User not exist'));
+			Page::displayError(Yaf\Registry::get('lang')->translate('User not exist'));
 		}
 
 		// 如果要修改密码
@@ -121,7 +123,7 @@ class UserController extends Local\Controller\Base
 		{
 			if (strlen($password) < USER_PASSWORD_MIN || strlen($password) > USER_PASSWORD_MAX)
 			{
-				Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('Password length is not correct'));
+				Page::displayError(Yaf\Registry::get('lang')->translate('Password length is not correct'));
 			}
 			$data['password'] = md5(md5($password) . $userInfo['salt']);
 		}

@@ -6,6 +6,8 @@
  * @author $Author: 5590548@qq.com $
  *
  */
+use Local\Util\Page;
+
 class IndexController extends Local\Controller\Base
 {
 
@@ -39,7 +41,7 @@ class IndexController extends Local\Controller\Base
 	{
 		$title = Yaf\Registry::get('lang')->translate('Admin home');
 		$this->getView()->assign('title', $title);
-		$this->getView()->assign('breadCrumb', Local\Util\Page::dispayBreadCrumb($title, array(), TRUE));
+		$this->getView()->assign('breadCrumb', Page::dispayBreadCrumb($title, array(), TRUE));
 	}
 
 }

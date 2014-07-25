@@ -6,6 +6,8 @@
  * @author $Author: 5590548@qq.com $
  *
  */
+use Local\Util\Page;
+
 class UserGroupController extends Local\Controller\Base
 {
 
@@ -47,7 +49,7 @@ class UserGroupController extends Local\Controller\Base
 
 		$title = Yaf\Registry::get('lang')->translate('User group management');
 		$this->getView()->assign('title', $title);
-		$this->getView()->assign('breadCrumb', Local\Util\Page::dispayBreadCrumb($title, array(), TRUE));
+		$this->getView()->assign('breadCrumb', Page::dispayBreadCrumb($title, array(), TRUE));
 	}
 
 	/**
@@ -61,7 +63,7 @@ class UserGroupController extends Local\Controller\Base
 		$breadCrumb[] = $title;
 
 		$this->getView()->assign('title', $title);
-		$this->getView()->assign('breadCrumb', Local\Util\Page::dispayBreadCrumb($title, $breadCrumb, TRUE));
+		$this->getView()->assign('breadCrumb', Page::dispayBreadCrumb($title, $breadCrumb, TRUE));
 	}
 
 }
