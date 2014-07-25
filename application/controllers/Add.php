@@ -26,7 +26,7 @@ class AddController extends Local\Controller\Base
 		// 检查用户是否登录
 		if (empty(Yaf\Registry::get('userInfo')['userid']))
 		{
-			Page::displayError(Yaf\Registry::get('lang')->translate('Please login'), SYSTEMURL . '/login');
+			Page::displayError('Please login', SYSTEMURL . '/login');
 		}
 	}
 
@@ -56,28 +56,28 @@ class AddController extends Local\Controller\Base
 
 		if (empty($data['title']))
 		{
-			Page::displayError(Yaf\Registry::get('lang')->translate('Project name cannot be empty'));
+			Page::displayError('Project name cannot be empty');
 		}
 
 		if (empty($data['categoryid']))
 		{
-			Page::displayError(Yaf\Registry::get('lang')->translate('Please select a category'));
+			Page::displayError('Please select a category');
 		}
 
 		if (empty($data['url']))
 		{
-			Page::displayError(Yaf\Registry::get('lang')->translate('Project URL cannot be empty'));
+			Page::displayError('Project URL cannot be empty');
 		}
 
 		if (empty($data['memo']))
 		{
-			Page::displayError(Yaf\Registry::get('lang')->translate('Project description cannot be empty'));
+			Page::displayError('Project description cannot be empty');
 		}
 
 		$this->models['gitModel']->saveData($data);
 		unset($data);
 
-		Page::displayMessage(Yaf\Registry::get('lang')->translate('Successful submission Please wait for audit'), '/add');
+		Page::displayMessage('Successful submission Please wait for audit', '/add');
 
 		return FALSE;
 	}

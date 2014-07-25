@@ -225,7 +225,7 @@ class Page
 
 		$view = new \Yaf\View\Simple($request);
 		$view->setScriptPath(\Yaf\Registry::get('config')->application->view->path);
-		$view->assign('message', $message);
+		$view->assign('message', \Yaf\Registry::get('lang')->translate($message));
 		$view->assign('url', $url);
 		$view->assign('time', $time);
 		$view->display($template);
@@ -242,7 +242,7 @@ class Page
 	 */
 	public static function displayError($message, $url = '', $time = 3)
 	{
-		self::displayMessage($message, $url, $time, 'error/errormessage.php');
+		self::displayMessage(\Yaf\Registry::get('lang')->translate($message), $url, $time, 'error/errormessage.php');
 	}
 
 }

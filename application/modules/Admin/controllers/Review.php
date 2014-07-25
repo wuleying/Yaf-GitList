@@ -70,7 +70,7 @@ class ReviewController extends Local\Controller\Base
 		$id = (int) $id;
 		if (empty($id))
 		{
-			Page::displayError(Yaf\Registry::get('lang')->translate('Incorrect parameter'));
+			Page::displayError('Incorrect parameter');
 		}
 
 		$this->models['gitModel']->reviewGit($id, $approved);

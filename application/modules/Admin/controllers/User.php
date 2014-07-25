@@ -77,7 +77,7 @@ class UserController extends Local\Controller\Base
 
 		if (empty($userInfo))
 		{
-			Page::displayError(Yaf\Registry::get('lang')->translate('User not exist'));
+			Page::displayError('User not exist');
 		}
 
 		$this->getView()->assign('userInfo', $userInfo);
@@ -104,18 +104,18 @@ class UserController extends Local\Controller\Base
 
 		if (empty($data['userid']))
 		{
-			Page::displayError(Yaf\Registry::get('lang')->translate('Please select a user'));
+			Page::displayError('Please select a user');
 		}
 
 		if (empty($data['usergroupid']))
 		{
-			Page::displayError(Yaf\Registry::get('lang')->translate('Please select a user group'));
+			Page::displayError('Please select a user group');
 		}
 
 		$userInfo = $this->models['userModel']->getUserById($data['userid']);
 		if (empty($userInfo))
 		{
-			Page::displayError(Yaf\Registry::get('lang')->translate('User not exist'));
+			Page::displayError('User not exist');
 		}
 
 		// 如果要修改密码
@@ -123,7 +123,7 @@ class UserController extends Local\Controller\Base
 		{
 			if (strlen($password) < USER_PASSWORD_MIN || strlen($password) > USER_PASSWORD_MAX)
 			{
-				Page::displayError(Yaf\Registry::get('lang')->translate('Password length is not correct'));
+				Page::displayError('Password length is not correct');
 			}
 			$data['password'] = md5(md5($password) . $userInfo['salt']);
 		}

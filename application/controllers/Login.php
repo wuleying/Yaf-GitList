@@ -51,24 +51,24 @@ class LoginController extends Local\Controller\Base
 
 		if (empty($email))
 		{
-			Page::displayError(Yaf\Registry::get('lang')->translate('Please enter email'));
+			Page::displayError('Please enter email');
 		}
 
 		if (empty($password))
 		{
-			Page::displayError(Yaf\Registry::get('lang')->translate('Please enter password'));
+			Page::displayError('Please enter password');
 		}
 
 		if (!filter_var($email, FILTER_VALIDATE_EMAIL))
 		{
-			Page::displayError(Yaf\Registry::get('lang')->translate('Email format error'));
+			Page::displayError('Email format error');
 		}
 
 		$userInfo = $this->models['userModel']->getUserByEmail($email);
 
 		if (empty($userInfo))
 		{
-			Page::displayError(Yaf\Registry::get('lang')->translate('User not exist'));
+			Page::displayError('User not exist');
 		}
 
 		// 检查密码
@@ -85,7 +85,7 @@ class LoginController extends Local\Controller\Base
 		}
 		else
 		{
-			Page::displayError(Yaf\Registry::get('lang')->translate('Email or password is not correct'));
+			Page::displayError('Email or password is not correct');
 		}
 
 		return FALSE;

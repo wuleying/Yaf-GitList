@@ -107,7 +107,7 @@ class CategoryController extends Local\Controller\Base
 
 		if (empty($data['categoryname']))
 		{
-			Page::displayError(Yaf\Registry::get('lang')->translate('Please enter category name'));
+			Page::displayError('Please enter category name');
 		}
 
 		$this->models['categoryModel']->saveData($data);
