@@ -6,6 +6,8 @@
  * @author $Author: 5590548@qq.com $
  *
  */
+use Local\Util\Page;
+
 class AddController extends Local\Controller\Base
 {
 
@@ -20,6 +22,12 @@ class AddController extends Local\Controller\Base
 			'gitModel' => new GitModel(),
 			'categoryModel' => new CategoryModel()
 		);
+
+		// 检查用户是否登录
+		if (empty(Yaf\Registry::get('userInfo')['userid']))
+		{
+			Page::displayError(Yaf\Registry::get('lang')->translate('Please login'), SYSTEMURL . '/login');
+		}
 	}
 
 	/**
@@ -48,28 +56,28 @@ class AddController extends Local\Controller\Base
 
 		if (empty($data['title']))
 		{
-			Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('Project name cannot be empty'));
+			Page::displayError(Yaf\Registry::get('lang')->translate('Project name cannot be empty'));
 		}
 
 		if (empty($data['categoryid']))
 		{
-			Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('Please select a category'));
+			Page::displayError(Yaf\Registry::get('lang')->translate('Please select a category'));
 		}
 
 		if (empty($data['url']))
 		{
-			Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('Project URL cannot be empty'));
+			Page::displayError(Yaf\Registry::get('lang')->translate('Project URL cannot be empty'));
 		}
 
 		if (empty($data['memo']))
 		{
-			Local\Util\Page::displayError(Yaf\Registry::get('lang')->translate('Project description cannot be empty'));
+			Page::displayError(Yaf\Registry::get('lang')->translate('Project description cannot be empty'));
 		}
 
 		$this->models['gitModel']->saveData($data);
 		unset($data);
 
-		Local\Util\Page::displayMessage(Yaf\Registry::get('lang')->translate('Successful submission Please wait for audit'), '/add');
+		Page::displayMessage(Yaf\Registry::get('lang')->translate('Successful submission Please wait for audit'), '/add');
 
 		return FALSE;
 	}

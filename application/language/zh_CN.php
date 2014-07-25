@@ -43,6 +43,7 @@ return array(
 	// Messages
 	'Register successful' => '注册成功',
 	'Successful submission Please wait for audit' => '提交成功，管理员审核通过后显示，请耐心等待',
+	'Please login' => '请先登录',
 	// Errors
 	'Please enter email' => '请填写邮箱',
 	'Please enter password' => '请填写密码',

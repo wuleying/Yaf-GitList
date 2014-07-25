@@ -40,7 +40,7 @@ class UserGroupModel extends Local\Db\Base
 	 * 从 Memcache 中获取缓存数据
 	 *
 	 * @return array
-	 * 
+	 *
 	 */
 	public function getAllUserGroupsByCache()
 	{
