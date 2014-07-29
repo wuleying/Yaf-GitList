@@ -190,4 +190,42 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
 		unset($userInfo);
 	}
 
+	/**
+	 * 初始化站点
+	 * @todo 因为此方法在 Controller 之前执行，无法获取 ModuleName
+	 *
+	 */
+	/**
+	public function _initSite(Yaf\Dispatcher $dispatcher)
+	{
+		$request = $dispatcher::getInstance()->getRequest();
+		// 常量
+		define('MODULE_NAME', strtolower($request->getModuleName()));
+		define('CONTROLLER_NAME', strtolower($request->getControllerName()));
+		define('ACTION_NAME', strtolower($request->getActionName()));
+
+		var_dump($request);
+		// 检查站点是否已经关闭
+		if ('admin' == strtolower(MODULE_NAME))
+		{
+			return;
+		}
+
+		if (Yaf\Registry::get('setting')['closesite'])
+		{
+			$userinfo = Yaf\Registry::get('userInfo');
+			if (empty($userinfo) || !in_array($userinfo['usergroupid'], explode(',', Yaf\Registry::get('setting')['closesiteusergroupid'])))
+			{
+				$view = new Yaf\View\Simple($request);
+				$view->setScriptPath(Yaf\Registry::get('config')->application->view->path);
+				$view->assign('message', Yaf\Registry::get('setting')['closesitedescription']);
+				$view->display('error/siteclose.php');
+				unset($userinfo);
+				exit();
+			}
+		}
+	}
+	 *
+	 */
+
 }
